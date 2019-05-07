@@ -1,0 +1,66 @@
+body {
+    //先定义背景
+    background: url("../cup/img_bg_haven.jpg"); //这个是正确的
+    background-position: center;
+    background-size: cover; /*这个是正确的*/
+
+    /* 定义自己布局---bootstrap的不好用*/
+    .container-cup {
+        width: 100%;
+
+        .row-cup {
+            display: flex;
+
+        }
+    }
+
+    .application-title {
+        font-size: 2.1em;
+        color: white;
+        text-align: center;
+        line-height: 78px; // 设置成图片的高度，确保垂直居中
+    }
+    .application-menus {
+        text-align: center;
+        line-height: 78px; // 设置成图片的高度，确保垂直居中
+
+        ul {
+            list-style: none;
+
+            li {
+                float: right;
+                padding: 10px;
+
+                a {
+                    color: white;
+                }
+            }
+        }
+    }
+
+    .application-message {
+        color: yellow;
+        line-height: 78px; // 设置成图片的高度，确保垂直居中
+    }
+
+    .application-status {
+        color: white;
+        list-style: none;
+        padding-top: 10%;
+
+        a {
+            color: #00bbee;
+        }
+    }
+
+    .application-footer {
+        color: white;
+        float: right;
+        font-size: 1.2em;
+    }
+
+    .application-copyright {
+        font-size: 1.2em;
+    }
+
+}

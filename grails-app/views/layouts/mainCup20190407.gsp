@@ -24,27 +24,31 @@
     <!--设置Base-->
     <base href="<%=basePath%>"/>
 
-    <asset:stylesheet src="application.css"/>
-
-    <!-- 只有加载这个样式，才能实现全屏显示 -->
-    <!--asset:stylesheet src="bootstrap/css/bootstrap.css"/-->
+    <!-- 先加载BootStrap-->
     <asset:stylesheet src="bootstrap.min.css"/>
 
     <!--引入easyui的相关内容-->
     <asset:stylesheet src="easyui/themes/default/easyui.css"/>
     <!--asset:stylesheet src="easyui/themes/bootstrap/easyui.css"/-->
-    <asset:stylesheet src="easyui/themes/icon.css"/>
-    <asset:stylesheet src="easyui/themes/color.css"/>
+    <!--asset:stylesheet src="easyui/themes/icon.css"/-->
+    <!--asset:stylesheet src="easyui/themes/color.css"/-->
+
+    <asset:stylesheet src="application.css"/>
 
     <!-- 加载石油大学的设置-->
-    <asset:stylesheet src="cup/cup20190407.css"/>
+    <asset:stylesheet src="cup/cup20190507.css"/>
 
     <!--JS加载-->
     <asset:javascript src="jquery-3.3.1.min.js"/>
-    <asset:javascript src="easyui/jquery.min.js"/>
+    <!--这个先不加载？ -->
+    <!--asset:javascript src="easyui/jquery.min.js"/-->
+
     <asset:javascript src="easyui/jquery.easyui.min.js"/>
 
+    <asset:javascript src="popper.min.js"/>
     <asset:javascript src="bootstrap.js"/>
+
+    <!--这个只是为了兼容早期的，使用了cookie的代码-->
     <asset:javascript src="jquery/jquery.cookie.js"/>
 
     <!-- 加载石油大学的设置-->
@@ -110,6 +114,7 @@
 
 <g:layoutBody/>
 
+<hr>
 <div class="nav">
     <div class="col-md-4 column">
         <div class="application-copyright">

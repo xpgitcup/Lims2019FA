@@ -15,23 +15,23 @@
     "description": "这里应该是中国石油大学的详细介绍"
   },
   {
-    "name": "main多相流实验室",
+    "name": "公司1",
     "title": "实验室数据管理系统",
-    "logo": "cup_big.png",
+    "logo": "u68.jpg",
     "href": "www.cup.edu.cn",
     "description": "这里应该是中国石油大学的详细介绍"
   },
   {
-    "name": "中石化",
+    "name": "公司2",
     "title": "中石化",
-    "logo": "logo_cnooc.png",
+    "logo": "u70.jpg",
     "href": "www.cup.edu.cn",
     "description": "这里是中石化的简介"
   },
   {
-    "name": "微信",
+    "name": "公司3",
     "title": "微信",
-    "logo": "微信.png",
+    "logo": "u72.jpg",
     "href": "www.cup.edu.cn",
     "description": "这里是微信的简介"
   }

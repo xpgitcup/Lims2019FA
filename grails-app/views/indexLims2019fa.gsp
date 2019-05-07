@@ -26,7 +26,40 @@
 
 <div class="container-fluid">
     <div align="center">
-        <asset:image src="cup/${cn.edu.cup.basic.Caption.findByName("main详细介绍")?.logo}"/>
+        <div id="lims2019fa" class="carousel slide" data-ride="carousel">
+
+            <!-- 指示符 -->
+            <ul class="carousel-indicators">
+                <li data-target="#demo" data-slide-to="0" class="active"></li>
+                <li data-target="#demo" data-slide-to="1"></li>
+                <li data-target="#demo" data-slide-to="2"></li>
+            </ul>
+
+            <!-- 轮播图片 -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <asset:image src="cup/${cn.edu.cup.basic.Caption.findByName('公司1')?.logo}"/>
+                </div>
+
+                <div class="carousel-item">
+                    <asset:image src="cup/${cn.edu.cup.basic.Caption.findByName('公司2')?.logo}"/>
+                </div>
+
+                <div class="carousel-item">
+                    <asset:image src="cup/${cn.edu.cup.basic.Caption.findByName('公司2')?.logo}"/>
+                </div>
+            </div>
+
+            <!-- 左右切换按钮 -->
+            <a class="carousel-control-prev" href="#lims2019fa" data-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a class="carousel-control-next" href="#lims2019fa" data-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+
+        </div>
+
     </div>
 </div>
 
