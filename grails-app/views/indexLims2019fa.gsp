@@ -46,7 +46,7 @@
                 </div>
 
                 <div class="carousel-item">
-                    <asset:image src="cup/${cn.edu.cup.basic.Caption.findByName('公司2')?.logo}"/>
+                    <asset:image src="cup/${cn.edu.cup.basic.Caption.findByName('公司3')?.logo}"/>
                 </div>
             </div>
 

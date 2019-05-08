@@ -61,6 +61,57 @@
 
 <body>
 
+<div class="nav navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-1">
+                <div class="navbar-header logo">
+                    <asset:image src="cup/${cn.edu.cup.basic.Caption.findByName("main")?.logo}" alt="程序Logo"/>
+                </div>
+            </div>
+            <div class="col-2">
+                <h1><span class="badge badge-primary">${cn.edu.cup.basic.Caption.findByName("main")?.title}</span></h1>
+            </div>
+
+            <div class="col-md-7 column">
+                <g:if test="${session.systemUser}">
+                    <div id="applicationMenuDiv" class="application-menus"></div>
+                </g:if>
+                <g:else>
+                    <div class="application-message">
+                        请先登录！
+                    </div>
+                </g:else>
+            </div>
+
+            <div class="col-md-1 column">
+                <ul class="slider-box">
+                    <g:if test="${session.systemUser}">
+                        <li style="">
+                            当前：${session.userName}
+                        </li>
+                        <li class="list-group-item">
+                            身份：${session.userTitle}
+                        </li>
+                        <li class="list-group-item">
+                            <a href="${createLink(uri: '/home/changePasswordUI')}">修改密码</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="${createLink(uri: '/home/logout')}">退出</a>
+                        </li>
+                    </g:if>
+                    <g:else>
+                        <li class="list-group-item">
+                            <a href="${createLink(uri: '/home/loginUI')}">去登录</a>
+                        </li>
+                    </g:else>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 <div class="container-cup">
     <div class="row-cup">
 
@@ -73,40 +124,6 @@
             </div>
         </div>
 
-        <div class="col-md-7 column">
-            <g:if test="${session.systemUser}">
-                <div id="applicationMenuDiv" class="application-menus"></div>
-            </g:if>
-            <g:else>
-                <div class="application-message">
-                    请先登录！
-                </div>
-            </g:else>
-        </div>
-
-        <div class="col-md-1 column">
-            <ul class="application-status">
-                <g:if test="${session.systemUser}">
-                    <li>
-                        当前：${session.userName}
-                    </li>
-                    <li>
-                        身份：${session.userTitle}
-                    </li>
-                    <li>
-                        <a href="${createLink(uri: '/home/changePasswordUI')}">修改密码</a>
-                    </li>
-                    <li>
-                        <a href="${createLink(uri: '/home/logout')}">退出</a>
-                    </li>
-                </g:if>
-                <g:else>
-                    <li>
-                        <a href="${createLink(uri: '/home/loginUI')}">去登录</a>
-                    </li>
-                </g:else>
-            </ul>
-        </div>
 
     </div>
 
@@ -115,6 +132,7 @@
 <g:layoutBody/>
 
 <hr>
+
 <div class="nav">
     <div class="col-md-4 column">
         <div class="application-copyright">
