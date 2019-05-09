@@ -48,10 +48,10 @@
 
 <body>
 
-<div class="container-fluid bgCup">
+<div class="container-fluid bgCup m-0">
     <!--第一行的内容 -->
-    <div class="row">
-        <div class="col-4">
+    <div class="row m-0 p-0">
+        <div class="col-4 m-0 p-0">
             <div class="navbar-header logo">
                 <ul class="nav list-unstyled">
                     <li>
@@ -59,16 +59,16 @@
                     </li>
                     <li>
                         <h1>
-                            <span class="text-white">${cn.edu.cup.basic.Caption.findByName("main")?.title}</span>
+                            <span class="text-white m-0">${cn.edu.cup.basic.Caption.findByName("main")?.title}</span>
                         </h1>
                     </li>
                 </ul>
             </div>
         </div>
 
-        <div class="col-6">
+        <div class="col-7 text-center">
             <g:if test="${session.systemUser}">
-                <div id="applicationMenuDiv" class="application-menus"></div>
+                <div id="applicationMenuDiv"></div>
             </g:if>
             <g:else>
                 <div class="application-message">
@@ -77,8 +77,8 @@
             </g:else>
         </div>
 
-        <div class="col-2">
-            <ul class="list-unstyled">
+        <div class="col-1 m-0 p-0">
+            <ul class="list-unstyled text-right">
                 <g:if test="${session.systemUser}">
                     <li class="list-group-item m-0 p-0">
                         当前：${session.userName}
@@ -110,19 +110,19 @@
 
 
     <!--第4行-->
-    <div class="row">
+    <div class="row m-0 p-0 text-white">
         <div class="col-4">
-            <div class="application-copyright">
+            <div>
                 中国石油大学（北京），Copyright 2019, Ver 0.9
             </div>
         </div>
 
-        <div class="col-4">
-            <div class="application-footer">当前环境 ${grails.util.Environment.current}</div>
+        <div class="col-4 text-center">
+            <div>当前环境 ${grails.util.Environment.current}</div>
         </div>
 
-        <div class="col-4">
-            <div id="onlineCount" class="application-footer"></div>
+        <div class="col-4 text-right m-0 p-0">
+            <div id="onlineCount" class="text-right"></div>
         </div>
     </div>
 
