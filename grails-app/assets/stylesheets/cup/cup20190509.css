@@ -1,0 +1,7 @@
+.bgCup {
+  background: url("../cup/img_bg_haven.jpg");
+  background-position: center;
+  background-size: cover;
+  /*这个是正确的*/
+}
+/*# sourceMappingURL=cup20190509.css.map */
