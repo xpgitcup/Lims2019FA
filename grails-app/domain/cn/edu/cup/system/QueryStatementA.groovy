@@ -10,6 +10,7 @@ class QueryStatementA {
     String queryString
     String viewName
     boolean isSQL = false
+    Date updateTime = new Date()
 
     static mapping = {
         sort('controllerName')
@@ -26,6 +27,7 @@ class QueryStatementA {
         queryString(nullable: true, size: 0..1024)
         viewName(nullable: true)
         isSQL()
+        updateTime()
     }
 
     String toString() {

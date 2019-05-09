@@ -104,7 +104,7 @@
 
 
     <!--第3行-->
-    <div class="row">
+    <div class="row m-0 p-0">
         <g:layoutBody/>
     </div>
 
