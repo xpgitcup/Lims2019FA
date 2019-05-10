@@ -51,7 +51,7 @@
 <div class="container-fluid bgCup m-0">
     <!--第一行的内容 -->
     <div class="row m-0 p-0">
-        <div class="col-4 m-0 p-0">
+        <div class="col-lg-4 m-0 p-0">
             <div class="navbar-header logo">
                 <ul class="nav list-unstyled">
                     <li>
@@ -66,7 +66,7 @@
             </div>
         </div>
 
-        <div class="col-7 text-center">
+        <div class="col-lg-7 text-center">
             <g:if test="${session.systemUser}">
                 <div id="applicationMenuDiv"></div>
             </g:if>
@@ -77,7 +77,7 @@
             </g:else>
         </div>
 
-        <div class="col-1 m-0 p-0">
+        <div class="col-lg-1 m-0 p-0">
             <ul class="list-unstyled text-right">
                 <g:if test="${session.systemUser}">
                     <li class="list-group-item m-0 p-0">
