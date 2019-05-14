@@ -70,6 +70,46 @@
     <!--第二行-->
     <div class="flex-row m-0 p-0">
         <div class="col-12">
+
+
+            <!-- 选项卡 -->
+            <ul class="nav nav-tabs text-center" role="tablist">
+                <li class="nav-item active"><a href="#div进展" class="text-white" data-toggle="tab">进展</a></li>
+                <li class="nav-item"><a href="#div登录" class="text-white" data-toggle="tab">登录</a></li>
+            </ul>
+
+            <!-- 具体卡片-->
+            <div class="tab-content">
+                <div id="div进展" class="tab-pane active">
+                    <div class="panel text-white" role="tabpanel">
+                        <br>在这里显示进展所需的信息</br>
+                        <br>在这里显示进展所需的信息</br>
+                        <br>在这里显示进展所需的信息</br>
+                    </div>
+                    <ul class="pagination">
+                        <li><a>&laquo</a></li>
+                        <li>${currentPage进展}</li>
+                        <li><a>&raquo</a></li>
+                    </ul>
+                </div>
+
+                <div id="div登录" class="tab-pane" role="tabpanel">
+                    <div class="panel text-white">
+                        <br>在这里显示登录所需的信息</br>
+                        <br>在这里显示登录所需的信息</br>
+                        <br>在这里显示登录所需的信息</br>
+                    </div>
+                    <ul class="pagination">
+                        <li><a>&laquo</a></li>
+                        <li>${currentPage登录}</li>
+                        <li><a>&raquo</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="panel panel-default">
+            </div>
+
         </div>
     </div>
 </div>
