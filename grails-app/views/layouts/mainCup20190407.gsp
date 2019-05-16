@@ -28,9 +28,8 @@
     <asset:stylesheet src="cup/cup20190509.css"/>
 
     <!-- 先加载BootStrap-->
+    <!--asset:stylesheet src="application.css"/-->
     <asset:stylesheet src="bootstrap.min.css"/>
-
-    <asset:stylesheet src="application.css"/>
 
     <!--JS加载-->
     <asset:javascript src="jquery-3.3.1.min.js"/>
@@ -58,9 +57,9 @@
                         <asset:image src="cup/${cn.edu.cup.basic.Caption.findByName("main")?.logo}" alt="程序Logo"/>
                     </li>
                     <li>
-                        <h1>
+                        <h2>
                             <span class="text-white m-0">${cn.edu.cup.basic.Caption.findByName("main")?.title}</span>
-                        </h1>
+                        </h2>
                     </li>
                 </ul>
             </div>
@@ -104,9 +103,7 @@
 
 
     <!--第3行-->
-    <div class="row m-0 p-0">
-        <g:layoutBody/>
-    </div>
+    <g:layoutBody/>
 
 
     <!--第4行-->

@@ -67,51 +67,69 @@
         </div>
     </div>
 
-    <!--第二行-->
-    <div class="flex-row m-0 p-0">
-        <div class="col-12">
+</div>
 
+<!--第二行-->
+<div class="container-fluid">
 
-            <!-- 选项卡 -->
-            <ul class="nav nav-tabs text-center" role="tablist">
-                <li class="nav-item active"><a href="#div进展" class="text-white" data-toggle="tab">进展</a></li>
-                <li class="nav-item"><a href="#div登录" class="text-white" data-toggle="tab">登录</a></li>
+    <!-- 选项卡 -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#div进展情况" class="nav-link active" data-toggle="tab">
+                进展情况
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a href="#div登录情况" class="nav-link" data-toggle="tab">
+                登录情况
+            </a>
+        </li>
+
+    </ul>
+
+    <!-- 具体卡片-->
+    <div class="tab-content">
+        <!--具体的每个标签-->
+        <div id="div进展情况" class="tab-pane active">
+            <div id="display进展情况Div">
+                <br class="panel text-white" id="display进展情况Div">
+                <br> 在这里显示进展情况所需的信息</br>
+            </div>
+            <!-- 这里是分页设置-->
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="javascript: loadHomePreviousPage('进展情况')">&laquo</a>
+                </li>
+                <li class="page-information">${currentPage进展情况}</li>
+                <li>
+                    <a class="page-link" href="javascript: loadHomeNextPage('进展情况')">&raquo</a>
+                </li>
             </ul>
 
-            <!-- 具体卡片-->
-            <div class="tab-content">
-                <div id="div进展" class="tab-pane active">
-                    <div class="panel text-white" role="tabpanel">
-                        <br>在这里显示进展所需的信息</br>
-                        <br>在这里显示进展所需的信息</br>
-                        <br>在这里显示进展所需的信息</br>
-                    </div>
-                    <ul class="pagination">
-                        <li><a>&laquo</a></li>
-                        <li>${currentPage进展}</li>
-                        <li><a>&raquo</a></li>
-                    </ul>
-                </div>
+        </div>
 
-                <div id="div登录" class="tab-pane" role="tabpanel">
-                    <div class="panel text-white">
-                        <br>在这里显示登录所需的信息</br>
-                        <br>在这里显示登录所需的信息</br>
-                        <br>在这里显示登录所需的信息</br>
-                    </div>
-                    <ul class="pagination">
-                        <li><a>&laquo</a></li>
-                        <li>${currentPage登录}</li>
-                        <li><a>&raquo</a></li>
-                    </ul>
-                </div>
+        <!--具体的每个标签-->
+        <div id="div登录情况" class="tab-pane">
+            <div id="display登录情况Div">
+                <br class="panel text-white" id="display登录情况Div">
+                <br> 在这里显示登录情况所需的信息</br>
             </div>
-
-            <div class="panel panel-default">
-            </div>
+            <!-- 这里是分页设置-->
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="javascript: loadHomePreviousPage('登录情况')">&laquo</a>
+                </li>
+                <li class="page-information">${currentPage登录情况}</li>
+                <li>
+                    <a class="page-link" href="javascript: loadHomeNextPage('登录情况')">&raquo</a>
+                </li>
+            </ul>
 
         </div>
+
     </div>
+
 </div>
 
 </body>
