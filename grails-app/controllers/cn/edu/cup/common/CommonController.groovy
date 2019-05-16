@@ -1,0 +1,45 @@
+package cn.edu.cup.common
+
+import cn.edu.cup.system.SystemStatus
+import grails.converters.JSON
+
+class CommonController {
+
+    def commonQueryAService
+
+    def list() {
+        prepareParams()
+        def result = commonQueryAService.listFunction(params)
+        result = processResult(result, params)
+        def view = result.view
+        flash.message = result.message
+        if (request.xhr) {
+            render(template: view, model: [objectList: result.objectList, flash: flash])
+        } else {
+            respond result.objectList
+        }
+    }
+
+    def count() {
+        prepareParams()
+        def count = commonQueryAService.countFunction(params)
+        def result = [count: count]
+
+        if (request.xhr) {
+            render result as JSON
+        } else {
+            result
+        }
+    }
+
+    protected void prepareParams() {}
+
+    protected def processResult(result, params) {
+        return result
+    }
+
+    def index() {
+        def systemStatus = SystemStatus.findBySessionId(session.id)
+        model:[sessionParams: systemStatus.statusParameters]
+    }
+}

@@ -1,6 +1,7 @@
 package cn.edu.cup.os
 
 import cn.edu.cup.basic.Caption
+import cn.edu.cup.common.CommonController
 import cn.edu.cup.system.SystemMenu
 import cn.edu.cup.system.SystemStatus
 import cn.edu.cup.system.SystemUser
@@ -8,7 +9,7 @@ import grails.converters.JSON
 
 import java.text.SimpleDateFormat
 
-class HomeController {
+class HomeController extends CommonController {
 
     def systemCommonService
     def systemMenuService
@@ -16,47 +17,18 @@ class HomeController {
     def systemUserService
     def commonQueryAService
 
-    def prepareParams() {
+    void prepareParams() {
         def pkey = "${params.key}"
         // 计算起始时间
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Calendar c = Calendar.getInstance();
-        c.add(Calendar.DATE, - 7);
+        c.add(Calendar.DATE, -7);
         Date monday = c.getTime();
         String preMonday = sdf.format(monday);
         println("7 天以前 ：${preMonday}");
         // 更新参数
         if (pkey.contains("近7天")) {
             params.startDate = monday
-        }
-    }
-
-    def processResult(result, params) {
-        return result
-    }
-
-    def list() {
-        prepareParams()
-        def result = commonQueryAService.listFunction(params)
-        result = processResult(result, params)
-        def view = result.view
-        flash.message = result.message
-        if (request.xhr) {
-            render(template: view, model: [objectList: result.objectList, flash: flash])
-        } else {
-            respond result.objectList
-        }
-    }
-
-    def count() {
-        prepareParams()
-        def count = commonQueryAService.countFunction(params)
-        def result = [count: count]
-
-        if (request.xhr) {
-            render result as JSON
-        } else {
-            result
         }
     }
 
@@ -71,10 +43,10 @@ class HomeController {
         def user = systemUserService.get(session.systemUser.id)
         println("修改${user}的密码！${user.id}")
         def p = user.password
-        if (p==oldPassword) {
+        if (p == oldPassword) {
             def newPassword = params.newPassword
             def rePassword = params.rePassword
-            if (newPassword!="") {
+            if (newPassword != "") {
                 if (newPassword == rePassword) {
                     user.password = newPassword
                     systemUserService.save(user)
@@ -174,17 +146,7 @@ class HomeController {
     }
 
     def index() {
-        def controllers = initService.checkSystemStatus()
-        def fc = 0
-        controllers.each { e ->
-            //println("${e.statusKey}--")
-            if (e.value) {
-                fc++
-            }
-        }
-        def pfc = Math.round(fc / controllers.size() * 100 * 100) / 100
-        model:
-        [controllers: controllers, pfc: pfc]
+        super.index()
     }
 
     /*

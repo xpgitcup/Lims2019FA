@@ -125,6 +125,13 @@
 
 </div>
 
+<div class="" title="数据交换">
+    <ul>
+        <g:each in="${sessionParams}" var="item">
+            <li>${item.value}</li>
+        </g:each>
+    </ul>
+</div>
 <!--asset:javascript src="application.js"/-->
 
 </body>
