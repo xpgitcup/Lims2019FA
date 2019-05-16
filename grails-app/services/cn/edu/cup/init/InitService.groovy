@@ -144,10 +144,10 @@ class InitService {
         // 处理SQL数据
         def queryStatementAFileName = "${webRootDir}/config/queryStatementa.json"
         if (queryStatementAService.count() < 1) {
-            def queryStatementAs = importObjects(queryStatementAFileName, QueryStatementA.class, null)
-            queryStatementAs.each { e ->
-                queryStatementAService.save(e)
-            }
+            //def queryStatementAs = importObjects(queryStatementAFileName, QueryStatementA.class, null)
+            //queryStatementAs.each { e ->
+            //    queryStatementAService.save(e)
+            //}
         }
 
         // 初始化项目类型的计划

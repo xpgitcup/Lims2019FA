@@ -1,18 +1,21 @@
 $(function(){
     console.info(document.title + "加载了...")
 
-    loadHomeCurrentPage("进展情况");
+    loadHomeCurrentPage("当前进度");
+    loadHomeCurrentPage("登录信息");
 })
 
 function getCurrentPage(title) {
-    var currentPageName = "currentPageHome" + title
+    var currentPageName = "showCurrentPageHome" + title
     var currentPage = $("#currentPageHome" + title)
+    console.info("当前页数据?" + currentPage[0] + " " + currentPage[1]);
     var currentPageNumber
-    if (currentPage) {
+    if (currentPage[0] != undefined) {
         currentPageNumber = currentPage.text()
     } else {
         currentPageNumber = 1;
     }
+    $("#"+currentPageName).html(currentPageNumber)
     return currentPageNumber
 }
 

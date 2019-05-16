@@ -126,12 +126,14 @@
 </div>
 
 <div class="" title="数据交换">
+    <h3>${cn.edu.cup.system.SystemStatus.findBySessionId(session.id)?.statusParameters}</h3>
     <ul>
-        <g:each in="${sessionParams}" var="item">
-            <li>${item.value}</li>
+        <g:each in="${cn.edu.cup.system.SystemStatus.findBySessionId(session.id)?.statusParameters}" var="item">
+            <li id="#${item.statusKey}">${item.statusValue}</li>
         </g:each>
     </ul>
 </div>
+
 <!--asset:javascript src="application.js"/-->
 
 </body>

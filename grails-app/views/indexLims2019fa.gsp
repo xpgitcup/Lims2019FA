@@ -75,57 +75,57 @@
     <!-- 选项卡 -->
     <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
-            <a href="#div进展情况" class="nav-link active" data-toggle="tab">
-                进展情况
+            <a href="#div当前进度" class="nav-link active" data-toggle="tab">
+                当前进度
             </a>
         </li>
-
         <li class="nav-item">
-            <a href="#div登录情况" class="nav-link" data-toggle="tab">
-                登录情况
+            <a href="#div登录信息" class="nav-link" data-toggle="tab">
+                登录信息
             </a>
         </li>
-
     </ul>
 
     <!-- 具体卡片-->
     <div class="tab-content">
         <!--具体的每个标签-->
-        <div id="div进展情况" class="tab-pane active">
-            <div id="display进展情况Div">
-                <br class="panel text-white" id="display进展情况Div">
-                <br> 在这里显示进展情况所需的信息</br>
+        <div id="div当前进度" class="tab-pane active">
+            <div id="display当前进度Div">
+                <br class="panel text-white" id="display当前进度Div">
+                <br> 在这里显示当前进度所需的信息</br>
             </div>
             <!-- 这里是分页设置-->
             <ul class="pagination">
                 <li class="page-item">
-                    <a class="page-link" href="javascript: loadHomePreviousPage('进展情况')">&laquo</a>
+                    <a class="page-link" href="javascript: loadHomePreviousPage('当前进度')">&laquo</a>
                 </li>
-                <li class="page-information">${currentPage进展情况}</li>
+                <li class="page-item">
+                    <a id="showCurrentPageHome当前进度" class="page-link"></a>
+                </li>
                 <li>
-                    <a class="page-link" href="javascript: loadHomeNextPage('进展情况')">&raquo</a>
+                    <a class="page-link" href="javascript: loadHomeNextPage('当前进度')">&raquo</a>
                 </li>
             </ul>
-
         </div>
 
         <!--具体的每个标签-->
-        <div id="div登录情况" class="tab-pane">
-            <div id="display登录情况Div">
-                <br class="panel text-white" id="display登录情况Div">
-                <br> 在这里显示登录情况所需的信息</br>
+        <div id="div登录信息" class="tab-pane">
+            <div id="display登录信息Div">
+                <br class="panel text-white" id="display登录信息Div">
+                <br> 在这里显示登录信息所需的信息</br>
             </div>
             <!-- 这里是分页设置-->
             <ul class="pagination">
                 <li class="page-item">
-                    <a class="page-link" href="javascript: loadHomePreviousPage('登录情况')">&laquo</a>
+                    <a class="page-link" href="javascript: loadHomePreviousPage('登录信息')">&laquo</a>
                 </li>
-                <li class="page-information">${currentPage登录情况}</li>
+                <li class="page-item">
+                    <a class="page-link" id="showCurrentPageHome登录信息"></a>
+                </li>
                 <li>
-                    <a class="page-link" href="javascript: loadHomeNextPage('登录情况')">&raquo</a>
+                    <a class="page-link" href="javascript: loadHomeNextPage('登录信息')">&raquo</a>
                 </li>
             </ul>
-
         </div>
 
     </div>

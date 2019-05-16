@@ -13,23 +13,11 @@ class HomeController extends CommonController {
 
     def systemCommonService
     def systemMenuService
-    def initService
     def systemUserService
-    def commonQueryAService
 
-    void prepareParams() {
-        def pkey = "${params.key}"
-        // 计算起始时间
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar c = Calendar.getInstance();
-        c.add(Calendar.DATE, -7);
-        Date monday = c.getTime();
-        String preMonday = sdf.format(monday);
-        println("7 天以前 ：${preMonday}");
-        // 更新参数
-        if (pkey.contains("近7天")) {
-            params.startDate = monday
-        }
+    def list() {
+        systemCommonService.updateSystemStatus(request, params)
+        super.list()
     }
 
     /*
@@ -95,15 +83,17 @@ class HomeController extends CommonController {
                 systemMenuList = currentMenuItem.menuItems
             } else {
                 def q = SystemMenu.createCriteria()
-                def user = systemUserService.get(session.systemUser.id)
-                //println("当前用户：${user}")
-                if (user) {
-                    def roles = user.userRoles()
-                    //println("当前权限：${roles}")
-                    systemMenuList = q.list(params) {
-                        isNull('upMenuItem')
-                        'in'('menuContext', roles)      // 只要菜单的名字在其中就可以 20181208
-                        order('menuOrder')
+                if (session.systemUser) {
+                    def user = systemUserService.get(session.systemUser.id)
+                    //println("当前用户：${user}")
+                    if (user) {
+                        def roles = user.userRoles()
+                        //println("当前权限：${roles}")
+                        systemMenuList = q.list(params) {
+                            isNull('upMenuItem')
+                            'in'('menuContext', roles)      // 只要菜单的名字在其中就可以 20181208
+                            order('menuOrder')
+                        }
                     }
                 }
             }
@@ -119,16 +109,12 @@ class HomeController extends CommonController {
 
     def countOnlineUsers() {
         def current = new Date()
-        //Date start = new Date(current.getTime() - 30 * 60 * 1000) // 30分钟转换成毫秒
-        //def cc = SystemStatus.countByLogoutTimeIsNullAndLoginTimeGreaterThan(start)
-        //def users = SystemStatus.findAllByLogoutTimeIsNullAndLoginTimeGreaterThan(start)
         def ctx = request.session.servletContext
         List serviceUserList = (List) ctx.getAttribute("serviceUserList");
-
-        //def cc = SystemStatus.countByLogoutTimeIsNull()
+        //println("ctx: ${serviceUserList}")
         def cc = SystemStatus.countBySessionIdInList(serviceUserList)
-        //def users = SystemStatus.findAllByLogoutTimeIsNull()
         def users = SystemStatus.findAllBySessionIdInList(serviceUserList)
+        //println("在线：${users}")
         def usersStr = ""
         if (users.size() < 3) {
             users.each { e ->
@@ -143,10 +129,6 @@ class HomeController extends CommonController {
         } else {
             result
         }
-    }
-
-    def index() {
-        super.index()
     }
 
     /*
@@ -201,5 +183,7 @@ class HomeController extends CommonController {
     * */
 
     def loginUI() {}
+
+    def index() {}
 
 }

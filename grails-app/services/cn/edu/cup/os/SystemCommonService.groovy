@@ -56,30 +56,47 @@ class SystemCommonService {
     }
 
 
-    def updateSystemStatus(request, params) {
+    def synchronized updateSystemStatus(request, params) {
         //println("updateSystemStatus: ${params}")
         def ps = params
         ps.remove('password')
         def sid = request.session.getId()
         def ss = SystemStatus.findBySessionId(sid)
         if (ss) {
-            if (ps.action == "logout") {
-                ss.logoutTime = new Date()
+            switch (ps.action) {
+                case "login":
+                    ss.loginTime = new Date()
+                    ss.userName = request.session.userName
+                    ss.userRole = request.session.systemUser.userRoles()
+                    break
+                case "logout":
+                    ss.logoutTime = new Date()
+                    break
             }
         } else {
             def user = request.session.systemUser
-            ss = new SystemStatus(
-                    sessionId: sid,
-                    userName: request.session.userName,
-                    userRole: user.userRoles(),
-                    ip: request.getRemoteAddr()
-            )
+            if (user) {
+                ss = new SystemStatus(
+                        sessionId: sid,
+                        userName: request.session.userName,
+                        userRole: user.userRoles(),
+                        ip: request.getRemoteAddr()
+                )
+                println("已经登录了!")
+            } else {
+                ss = new SystemStatus(
+                        sessionId: sid,
+                        ip: request.getRemoteAddr()
+                )
+                println("尚未登录!")
+            }
         }
         systemStatusService.save(ss)
         // 更新参数
         setParameters(ps, ss)
         // 记录详细信息
         setDetailParameters(ps, ss)
+        //
     }
 
     private void setDetailParameters(ps, SystemStatus ss) {

@@ -7,11 +7,12 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Sample title</title>
-    </head>
-    <body>
-        <h1>${flash.message} <a href="operation4QueryStatement/index">列表&编辑</a></h1>
-    </body>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Sample title</title>
+</head>
+
+<body>
+<h4>${flash.message} <a class="text-white" href="operation4QueryStatementA/index">请完善查询语句</a></h4>
+</body>
 </html>

@@ -8,7 +8,9 @@ class CommonController {
     def commonQueryAService
 
     def list() {
+        println("原始参数：${params}")
         prepareParams()
+        println("处理后的参数：${params}")
         def result = commonQueryAService.listFunction(params)
         result = processResult(result, params)
         def view = result.view
@@ -38,8 +40,4 @@ class CommonController {
         return result
     }
 
-    def index() {
-        def systemStatus = SystemStatus.findBySessionId(session.id)
-        model:[sessionParams: systemStatus.statusParameters]
-    }
 }
