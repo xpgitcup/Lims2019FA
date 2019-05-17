@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta name="layout" content="mainCup20190407"/>
-    <g:set var="entityName" value="Home"/>
+    <g:set var="entityName" value="HomeA"/>
     <title>${entityName}</title>
     <asset:javascript src="cn/edu/cup/os/${entityName}.js"/>
 </head>
