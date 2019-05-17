@@ -25,7 +25,7 @@
     <!-- 选项卡 -->
     <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
-            <a href="#div我的科研" class="nav-link active" data-toggle="tab">
+            <a href="#div我的科研" class="nav-link" data-toggle="tab">
                 我的科研
             </a>
         </li>
@@ -39,7 +39,7 @@
     <!-- 具体卡片-->
     <div class="tab-content">
         <!--具体的每个标签-->
-        <div id="div我的科研" class="tab-pane active">
+        <div id="div我的科研" class="tab-pane">
             <div id="display我的科研Div">
                 <br class="panel text-white" id="display我的科研Div">
                 <br> 在这里显示我的科研所需的信息</br>
