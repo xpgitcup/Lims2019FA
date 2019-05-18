@@ -8,7 +8,7 @@
 
 <html>
 <head>
-    <!--meta name="layout" content="main"/-->
+<!--meta name="layout" content="main"/-->
 <!-- 实现可定制的布局 -->
     <g:if test="${layout}">
         <meta name="layout" content="${layout}"/>
@@ -30,44 +30,71 @@
 
 <body>
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="nav">
-            <ul id="operation4QueryStatementUl" class="indicator-cup">
-                <li></li>
-                <li>
-                    <a href="operation4QueryStatementA/exportToJsonFileName?fileName=config/out/queryStatementS" class="save">阿里导出Json文件</a>
-                </li>
-                <li>
-                    <a href="operation4QueryStatementA/backup2file" class="save">备份SQL文件</a>
-                </li>
-                <li>
-                    <a href="operation4QueryStatementA/importFromJsonFile?fileName=config/queryStatement.json" class="create">从Json文件导入</a>
-                </li>
-                <li>
-                    <a id="filter" href="javascript: listToDo()">待编辑&完成</a>
-                </li>
-                <li>当前筛选条件</li>
-                <li id="currentFilter" style="color: red">${keyString}</li>
-                <li>
-                    <a href="javascript: clearFilter()">清除筛选条件</a>
-                </li>
-                <li>
-                    <g:form onsubmit="return queryStatement()">
-                        <label>关键字</label>
-                        <input type="text" id="keyString" name="keyString" value=""/>
-                        <input type="submit" name="查询" value="查询">
-                    </g:form>
-                </li>
-            </ul>
-        </div>
-
-    </div>
+<div class="container-fluid ">
+    <ul id="operation4QueryStatementUl" class="nav bg-light">
+        <li class="nav-item p-1">
+            <a href="operation4QueryStatementA/exportToJsonFileName?fileName=config/out/queryStatementS"
+               class="save">阿里导出Json文件</a>
+        </li>
+        <li class="nav-item p-1">
+            <a href="operation4QueryStatementA/backup2file" class="save">备份SQL文件</a>
+        </li>
+        <li class="nav-item p-1">
+            <a href="operation4QueryStatementA/importFromJsonFile?fileName=config/queryStatement.json"
+               class="create">从Json文件导入</a>
+        </li>
+        <li class="nav-item p-1">
+            <a id="filter" href="javascript: listToDo()">待编辑&完成</a>
+        </li>
+        <li class="nav-item p-1">当前筛选条件</li>
+        <li id="currentFilter" style="color: red">${keyString}</li>
+        <li class="nav-item p-1">
+            <a href="javascript: clearFilter()">清除筛选条件</a>
+        </li>
+        <li class="nav-item p-1">
+            <g:form onsubmit="return queryStatement()">
+                <label>关键字</label>
+                <input type="text" id="keyString" name="keyString" value=""/>
+                <input type="submit" name="查询" value="查询">
+            </g:form>
+        </li>
+    </ul>
 </div>
 
-<div class="easyui-panel">
-    <div title="QueryStatementA" id="listQueryStatementADiv" class="easyui-panel"></div>
-    <div id="paginationQueryStatementADiv" class="easyui-pagination"></div>
+<div class="container-fluid">
+    <!-- 具体卡片-->
+    <div class="panel">
+        <!--具体的查询维护标签-->
+        <div id="display查询维护Div" class="panel">
+            <br> 在这里显示查询维护所需的信息</br>
+        </div>
+        <!-- 这里是分页设置-->
+        <ul class="pagination pagination-sm">
+            <li class="page-item">
+                <a class="page-link">页长</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" id="pageSizeQueryStatementA查询维护"></a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="javascript: loadQueryStatementAPreviousPage('查询维护')">&laquo</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" id="currentPageQueryStatementA查询维护"></a>
+            </li>
+            <li class="page-item">
+                <a class="page-link">/</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" id="totalPageQueryStatementA查询维护"></a>
+            </li>
+            <li>
+                <a class="page-link" href="javascript: loadQueryStatementANextPage('查询维护')">&raquo</a>
+            </li>
+        </ul>
+        <!--具体的查询维护标签结束======-->
+    </div>
+
 </div>
 
 <g:if test="${flash.message}">

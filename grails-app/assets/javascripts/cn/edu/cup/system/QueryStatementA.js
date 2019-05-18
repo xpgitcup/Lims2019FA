@@ -1,38 +1,118 @@
-//全局变量定义
-var listQueryStatementADiv;
-var localPageSizeQueryStatementA;
+var title = "查询维护"
 
-$(function () {
+$(function(){
+    console.info(document.title + "加载了...")
+    setupPaginationQueryStatementA();
+    loadQueryStatementACurrentPage();
+})
 
-    console.info("加载..." + document.title);
+/*
+* 初始化分页参数
+* */
+function setupPaginationQueryStatementA () {
+    // 对每个标签进行操作
+    console.info("处理：" + title + "!");
+    // 当前页
+    var currentPageName = "currentPageQueryStatementA" + title;
+    var currentPage = 1;
+    if (localStorage.hasOwnProperty(currentPageName)) {
+        currentPage = parseInt(localStorage.getItem(currentPageName));
+    }
+    $("#" + currentPageName).html(currentPage);
+    // 页长度
+    var pageSizeName = "pageSizeQueryStatementA" + title;
+    var pageSize = 10;
+    if (localStorage.hasOwnProperty(pageSizeName)) {
+        pageSize = parseInt(localStorage.getItem(pageSizeName))
+    } else {
+        localStorage.setItem(pageSizeName, pageSize);
+    }
+    $("#" + pageSizeName).html(pageSize);
+    // 总页数
+    var total = countDataQueryStatementA(title);
+    var totalPageName = "totalPageQueryStatementA" + title;
+    var totalPage =  Math.ceil(total/pageSize)
+    $("#" + totalPageName).html(totalPage)
+}
 
-    //变量获取
-    listQueryStatementADiv = $("#listQueryStatementADiv");
-    var localPageSizeQueryStatementA = readLocalStorage("pageSize" + document.title, 10);
-    var cPageNumber = readStorage("currentPage" + document.title, 1);
-    var total = countQueryStatementA(document.title)
+/*
+* 同时存储到两个地方
+* */
+function showCurrentPageNumber(currentPageNumber) {
+    var currentPageName = "currentPageQueryStatementA" + title
+    $("#" + currentPageName).html(currentPageNumber);
+    localStorage.setItem(currentPageName, currentPageNumber);
+}
 
-    listQueryStatementADiv.panel({
-        href: loadQueryStatementA(document.title, cPageNumber, localPageSizeQueryStatementA)
-    });
+/*
+* 获取当前页---从localStorage中获取
+* */
+function getCurrentPage() {
+    var currentPageName ="currentPageQueryStatementA" + title;
+    var currentPageNumber
+    if (localStorage.hasOwnProperty(currentPageName)) {
+        currentPageNumber = parseInt(localStorage.getItem(currentPageName))
+    } else {
+        currentPageNumber = 1
+        localStorage.setItem(currentPageName, currentPageNumber)
+    }
+    return currentPageNumber
+}
 
-    /*
-    * 设置分页参数
-    * */
-    var paginationQueryStatementADiv = $("#paginationQueryStatementADiv")
-    paginationQueryStatementADiv.pagination({
-        pageSize: localPageSizeQueryStatementA,
-        total: total,
-        pageList: [1, 3, 5, 10, 20, 30],
-        showPageList: false,
-        pageNumber: cPageNumber,
-        onSelectPage: function (pageNumber, pageSize) {
-            sessionStorage.setItem("currentPage" + document.title, pageNumber);     //记录当前页面
-            loadQueryStatementA(document.title, pageNumber, pageSize);
-        }
-    })
+/*
+* 获取页码上限
+* */
+function getTotalPage() {
+    var totalPageName = "totalPageQueryStatementA" + title;
+    var totalPage = parseInt($("#" + totalPageName).html());
+    return totalPage;
+}
 
-});
+/*
+* 加载当前页数据
+* */
+function loadQueryStatementACurrentPage() {
+    var currentPage = getCurrentPage()
+    loadDataQueryStatementA(title, currentPage);
+}
+
+/*
+* 向前翻页
+* */
+function loadQueryStatementAPreviousPage() {
+    var currentPage = getCurrentPage()
+    currentPage = currentPage - 1;
+    if (currentPage < 1) {
+        currentPage = 1;
+    }
+    showCurrentPageNumber(currentPage);
+    loadDataQueryStatementA(title, currentPage);
+}
+
+/*
+* 向后翻页
+* */
+function loadQueryStatementANextPage(currentPage) {
+    var currentPage = getCurrentPage()
+    var totalPage = getTotalPage()
+    currentPage = currentPage + 1;
+    if (currentPage > totalPage) {
+        currentPage = totalPage;
+    }
+    showCurrentPageNumber(currentPage);
+    loadDataQueryStatementA(currentPage);
+}
+
+function loadDataQueryStatementA(currentPage) {
+    var url = "operation4QueryStatementA/list?key=" + title + "&currentPageQueryStatementA" + title + "=" + currentPage;
+    ajaxRun(url, 0, "display" + title + "Div");
+}
+
+function countDataQueryStatementA() {
+    var url = "operation4QueryStatementA/count?key=" + title;
+    var total = ajaxCalculate(url);
+    return total;
+}
 
 /*
 * 统计函数
