@@ -1,12 +1,12 @@
-package cn.edu.cup.system
+<%=packageName ? "package ${packageName}" : ''%>
 
 import grails.converters.JSON
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 
-class QueryStatementAController extends cn.edu.cup.common.CommonController {
+class ${className}Controller extends cn.edu.cup.common.CommonController {
 
-    QueryStatementAService queryStatementAService
+    ${className}Service ${propertyName}Service
     def commonService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -16,18 +16,18 @@ class QueryStatementAController extends cn.edu.cup.common.CommonController {
         def userResult = false
         params.max = Math.min(max ?: 10, 100)
         if (params.title) {
-            model.queryStatementATitle = params.title
+            model.${propertyName}Title = params.title
             userResult = true
         }
         if (params.jsRoutine) {
-            model.queryStatementAJsRoutine = params.jsRoutine
+            model.${propertyName}JsRoutine = params.jsRoutine
             userResult = true
         }
 
         if (userResult) {
             model
         } else {
-            respond queryStatementAService.list(params), model:[queryStatementACount: queryStatementAService.count()]
+            respond ${propertyName}Service.list(params), model:[${propertyName}Count: ${propertyName}Service.count()]
         }
     }
 
@@ -37,12 +37,12 @@ class QueryStatementAController extends cn.edu.cup.common.CommonController {
             view = params.view
         }
 
-        def queryStatementA = queryStatementAService.get(id)
+        def ${propertyName} = ${propertyName}Service.get(id)
 
         if (request.xhr) {
-            render(template: view, model: [queryStatementA: queryStatementA])
+            render(template: view, model: [${propertyName}: ${propertyName}])
         } else {
-            respond queryStatementA
+            respond ${propertyName}
         }
     }
 
@@ -52,18 +52,18 @@ class QueryStatementAController extends cn.edu.cup.common.CommonController {
             view = params.view
         }
 
-        def queryStatementA = new QueryStatementA(params)
+        def ${propertyName} = new ${className}(params)
 
         if (request.xhr) {
-            render(template: view, model: [queryStatementA: queryStatementA])
+            render(template: view, model: [${propertyName}: ${propertyName}])
         } else {
-            respond queryStatementA
+            respond ${propertyName}
         }
     }
 
-    def save(QueryStatementA queryStatementA) {
+    def save(${className} ${propertyName}) {
 
-        if (queryStatementA == null) {
+        if (${propertyName} == null) {
             notFound()
             return
         }
@@ -79,16 +79,16 @@ class QueryStatementAController extends cn.edu.cup.common.CommonController {
         }
 
         try {
-            queryStatementAService.save(queryStatementA)
-            flash.message = message(code: 'default.created.message', args: [message(code: 'queryStatementA.label', default: 'QueryStatementA'), queryStatementA.id])
+            ${propertyName}Service.save(${propertyName})
+            flash.message = message(code: 'default.created.message', args: [message(code: '${propertyName}.label', default: '${className}'), ${propertyName}.id])
         } catch (ValidationException e) {
-            flash.message = queryStatementA.errors
+            flash.message = ${propertyName}.errors
         }
 
         withFormat {
-            js { render "alert('queryStatementA创建成功!')" }
+            js { render "alert('${propertyName}创建成功!')" }
 
-            json { render queryStatementA as JSON }
+            json { render ${propertyName} as JSON }
 
             '*' {
                 if (params.url) {
@@ -107,17 +107,17 @@ class QueryStatementAController extends cn.edu.cup.common.CommonController {
             view = params.view
         }
 
-        def queryStatementA = queryStatementAService.get(id)
+        def ${propertyName} = ${propertyName}Service.get(id)
 
         if (request.xhr) {
-            render(template: view, model: [queryStatementA: queryStatementA])
+            render(template: view, model: [${propertyName}: ${propertyName}])
         } else {
-            respond queryStatementA
+            respond ${propertyName}
         }
     }
 
-    def update(QueryStatementA queryStatementA) {
-        if (queryStatementA == null) {
+    def update(${className} ${propertyName}) {
+        if (${propertyName} == null) {
             notFound()
             return
         }
@@ -133,10 +133,10 @@ class QueryStatementAController extends cn.edu.cup.common.CommonController {
         }
 
         try {
-            queryStatementAService.save(queryStatementA)
-            flash.message = message(code: 'default.updated.message', args: [message(code: 'queryStatementA.label', default: 'QueryStatementA'), queryStatementA.id])
+            ${propertyName}Service.save(${propertyName})
+            flash.message = message(code: 'default.updated.message', args: [message(code: '${propertyName}.label', default: '${className}'), ${propertyName}.id])
         } catch (ValidationException e) {
-            flash.message = queryStatementA.errors
+            flash.message = ${propertyName}.errors
         }
 
         if (controller == "")
@@ -153,8 +153,8 @@ class QueryStatementAController extends cn.edu.cup.common.CommonController {
             return
         }
 
-        queryStatementAService.delete(id)
-        flash.message = message(code: 'default.deleted.message', args: [message(code: 'queryStatementA.label', default: 'QueryStatementA'), id])
+        ${propertyName}Service.delete(id)
+        flash.message = message(code: 'default.deleted.message', args: [message(code: '${propertyName}.label', default: '${className}'), id])
 
         def action = "index"
         if (params.nextAction) {
@@ -176,15 +176,15 @@ class QueryStatementAController extends cn.edu.cup.common.CommonController {
 
     def importFromJsonFile() {
 
-        def fileName = "${commonService.webRootPath}/${params.fileName}"
-        def objectList = commonService.importObjectArrayFromJsonFileName(fileName, QueryStatementA.class)
+        def fileName = "\${commonService.webRootPath}/\${params.fileName}"
+        def objectList = commonService.importObjectArrayFromJsonFileName(fileName, ${className}.class)
         if (objectList.size()>0) {
             // 先清空
-            QueryStatementA.list().each { e ->
-                queryStatementAService.delete(e.id)
+            ${className}.list().each { e ->
+                ${propertyName}Service.delete(e.id)
             }
             objectList.each { e ->
-                queryStatementAService.save(e)
+                ${propertyName}Service.save(e)
             }
         }
 
@@ -207,9 +207,9 @@ class QueryStatementAController extends cn.edu.cup.common.CommonController {
 
     def exportToJsonFile() {
 
-        def fileName = "${commonService.webRootPath}/${params.fileName}"
+        def fileName = "\${commonService.webRootPath}/\${params.fileName}"
 
-       def fjson = commonService.exportObjects2JsonString(QueryStatementA.list())
+       def fjson = commonService.exportObjects2JsonString(${className}.list())
         def printer = new File(fileName).newPrintWriter('utf-8')    //写入文件
         printer.println(fjson)
         printer.close()
@@ -235,7 +235,7 @@ class QueryStatementAController extends cn.edu.cup.common.CommonController {
     protected void notFound() {
         request.withFormat {
             form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'queryStatementA.label', default: 'QueryStatementA'), params.id])
+                flash.message = message(code: 'default.not.found.message', args: [message(code: '${propertyName}.label', default: '${className}'), params.id])
                 redirect action: "index", method: "GET"
             }
             '*'{ render status: NOT_FOUND }

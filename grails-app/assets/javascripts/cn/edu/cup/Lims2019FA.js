@@ -4,19 +4,30 @@ $(function(){
 })
 
 function setupTabsHome() {
-    // 首先获取各个标签
-    var tabs = $("a.nav-link");
-    tabs.each(function (e) {
-        var tab = tabs[e]
-        //tab.click(loadTabData(tab.innerText))
-        tab.onclick=loadTabData(tab.innerText)
-    })
-
-    // 数据加载函数
-    function loadTabData(title) {
-        console.info("点击事件...")
+    // 每个标签绑定数据加载函数
+    $("a.nav-link").on("click", function (e) {
+        var title = $(e.target).text().trim();
+        console.info("点击事件..." + title + "!")
+        localStorage.setItem("currentTabHome", title); //记录缺省标签
         loadHomeCurrentPage(title)
+    })
+    // 处理缺省标签
+    if (localStorage.hasOwnProperty("currentTabHome")) {
+        var title = localStorage.getItem("currentTabHome");
+        console.info("激活" + title);
+        var url = "a.nav-link:contains('" + title + "')"
+        var tab = $(url)
+        if (tab != undefined) {
+            tab.click()
+        } else {
+            // 激活第一个
+            $("a.nav-link:first").click()
+        }
+    } else {
+        // 激活第一个
+        $("a.nav-link:first").click()
     }
+
 }
 
 function showCurrentPageNumber(title, currentPageNumber) {
