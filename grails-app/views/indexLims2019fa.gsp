@@ -79,11 +79,6 @@
                 当前进度
             </a>
         </li>
-        <li class="nav-item">
-            <a href="#div登陆情况" class="nav-link" data-toggle="tab">
-                登陆情况
-            </a>
-        </li>
     </ul>
 
     <!-- 具体卡片-->
@@ -95,18 +90,24 @@
                 <br> 在这里显示当前进度所需的信息</br>
             </div>
             <!-- 这里是分页设置-->
-            <ul class="pagination">
+            <ul class="pagination pagination-sm">
+                <li class="page-item">
+                    <a class="page-link">页长</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" id="pageSizeHome当前进度"></a>
+                </li>
                 <li class="page-item">
                     <a class="page-link" href="javascript: loadHomePreviousPage('当前进度')">&laquo</a>
                 </li>
-                <li class="page-item">
-                    <a class="page-link" id="showCurrentPageHome当前进度"></a>
+                <li class="page-item" >
+                    <a class="page-link" id="currentPageHome当前进度"></a>
                 </li>
-                <li class="page-item">
+                <li class="page-item" >
                     <a class="page-link">/</a>
                 </li>
-                <li class="page-item">
-                    <a class="page-link" id="showTotalPageHome当前进度"></a>
+                <li class="page-item" >
+                    <a class="page-link" id="totalPageHome当前进度"></a>
                 </li>
                 <li>
                     <a class="page-link" href="javascript: loadHomeNextPage('当前进度')">&raquo</a>
@@ -115,34 +116,8 @@
         </div>
         <!--具体的当前进度标签结束======-->
 
-        <!--具体的登陆情况标签-->
-        <div id="div登陆情况" class="tab-pane">
-            <div id="display登陆情况Div">
-                <br class="panel text-white" id="display登陆情况Div">
-                <br> 在这里显示登陆情况所需的信息</br>
-            </div>
-            <!-- 这里是分页设置-->
-            <ul class="pagination">
-                <li class="page-item">
-                    <a class="page-link" href="javascript: loadHomePreviousPage('登陆情况')">&laquo</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" id="showCurrentPageHome登陆情况"></a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link">/</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" id="showTotalPageHome登陆情况"></a>
-                </li>
-                <li>
-                    <a class="page-link" href="javascript: loadHomeNextPage('登陆情况')">&raquo</a>
-                </li>
-            </ul>
-        </div>
-        <!--具体的登陆情况标签结束======-->
-
     </div>
+
 
 </div>
 

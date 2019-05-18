@@ -38,25 +38,38 @@
 
     <!-- 具体卡片-->
     <div class="tab-content">
-        <!--具体的每个标签-->
+        <!--具体的我的科研标签-->
         <div id="div我的科研" class="tab-pane">
             <div id="display我的科研Div">
                 <br class="panel text-white" id="display我的科研Div">
                 <br> 在这里显示我的科研所需的信息</br>
             </div>
             <!-- 这里是分页设置-->
-            <ul class="pagination">
+            <ul class="pagination pagination-sm">
+                <li class="page-item">
+                    <a class="page-link">页长</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" id="pageSizeHome我的科研"></a>
+                </li>
                 <li class="page-item">
                     <a class="page-link" href="javascript: loadHomePreviousPage('我的科研')">&laquo</a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" id="showCurrentPageHome我的科研"></a>
+                    <a class="page-link" id="currentPageHome我的科研"></a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link">/</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" id="totalPageHome我的科研"></a>
                 </li>
                 <li>
                     <a class="page-link" href="javascript: loadHomeNextPage('我的科研')">&raquo</a>
                 </li>
             </ul>
         </div>
+        <!--具体的我的科研标签结束======-->
         <!--具体的我的教学标签-->
         <div id="div我的教学" class="tab-pane">
             <div id="display我的教学Div">
@@ -64,18 +77,31 @@
                 <br> 在这里显示我的教学所需的信息</br>
             </div>
             <!-- 这里是分页设置-->
-            <ul class="pagination">
+            <ul class="pagination pagination-sm">
+                <li class="page-item">
+                    <a class="page-link">页长</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" id="pageSizeHome我的教学"></a>
+                </li>
                 <li class="page-item">
                     <a class="page-link" href="javascript: loadHomePreviousPage('我的教学')">&laquo</a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" id="showCurrentPageHome我的教学"></a>
+                    <a class="page-link" id="currentPageHome我的教学"></a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link">/</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" id="totalPageHome我的教学"></a>
                 </li>
                 <li>
                     <a class="page-link" href="javascript: loadHomeNextPage('我的教学')">&raquo</a>
                 </li>
             </ul>
         </div>
+        <!--具体的我的教学标签结束======-->
 
     </div>
 

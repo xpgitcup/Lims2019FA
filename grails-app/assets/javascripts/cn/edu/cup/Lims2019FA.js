@@ -1,19 +1,55 @@
-$(function(){
+$(function () {
     console.info(document.title + "加载了...")
+    setupPaginationHome();
     setupTabsHome();
 })
 
+/*
+* 初始化分页参数
+* */
+function setupPaginationHome() {
+    // 对每个标签进行操作
+    var tabs = $("a.nav-link");
+    tabs.each(function (e) {
+        var title = tabs[e].text.trim();
+        console.info("处理：" + title + "!");
+        // 当前页
+        var currentPageName = "currentPageHome" + title;
+        var currentPage = 1;
+        if (localStorage.hasOwnProperty(currentPageName)) {
+            currentPage = parseInt(localStorage.getItem(currentPageName));
+        }
+        $("#" + currentPageName).html(currentPage);
+        // 页长度
+        var pageSizeName = "pageSizeHome" + title;
+        var pageSize = 10;
+        if (localStorage.hasOwnProperty(pageSizeName)) {
+            pageSize = parseInt(localStorage.getItem(pageSizeName))
+        } else {
+            localStorage.setItem(pageSizeName, pageSize);
+        }
+        $("#" + pageSizeName).html(pageSize);
+        // 总页数
+        var total = countDataHome(title);
+        var totalPageName = "totalPageHome" + title;
+        var totalPage = Math.ceil(total / pageSize)
+        $("#" + totalPageName).html(totalPage)
+    })
+
+}
+
 function setupTabsHome() {
+    var currentTabName = "currentTabHome";
     // 每个标签绑定数据加载函数
     $("a.nav-link").on("click", function (e) {
         var title = $(e.target).text().trim();
         console.info("点击事件..." + title + "!")
-        localStorage.setItem("currentTabHome", title); //记录缺省标签
+        localStorage.setItem(currentTabName, title); //记录缺省标签
         loadHomeCurrentPage(title)
     })
     // 处理缺省标签
-    if (localStorage.hasOwnProperty("currentTabHome")) {
-        var title = localStorage.getItem("currentTabHome");
+    if (localStorage.hasOwnProperty(currentTabName)) {
+        var title = localStorage.getItem(currentTabName);
         console.info("激活" + title);
         var url = "a.nav-link:contains('" + title + "')"
         var tab = $(url)
@@ -30,29 +66,50 @@ function setupTabsHome() {
 
 }
 
+/*
+* 同时存储到两个地方
+* */
 function showCurrentPageNumber(title, currentPageNumber) {
-    var currentPageName = "showCurrentPageHome" + title
-    $("#" + currentPageName).html(currentPageNumber)
-    $("#currentPageHome" + title).html(currentPageNumber)
+    var currentPageName = "currentPageHome" + title
+    $("#" + currentPageName).html(currentPageNumber);
+    localStorage.setItem(currentPageName, currentPageNumber);
 }
 
+/*
+* 获取当前页---从localStorage中获取
+* */
 function getCurrentPage(title) {
-    var currentPage = $("#currentPageHome" + title)
+    var currentPageName = "currentPageHome" + title;
     var currentPageNumber
-    if (currentPage != undefined) {
-        currentPageNumber = parseInt(currentPage.text())
+    if (localStorage.hasOwnProperty(currentPageName)) {
+        currentPageNumber = parseInt(localStorage.getItem(currentPageName))
     } else {
-        currentPageNumber = 1;
+        currentPageNumber = 1
+        localStorage.setItem(currentPageName, currentPageNumber)
     }
     return currentPageNumber
 }
 
+/*
+* 获取页码上限
+* */
+function getTotalPage(title) {
+    var totalPageName = "totalPageHome" + title;
+    var totalPage = parseInt($("#" + totalPageName).html());
+    return totalPage;
+}
+
+/*
+* 加载当前页数据
+* */
 function loadHomeCurrentPage(title) {
     var currentPage = getCurrentPage(title)
-    showCurrentPageNumber(title, currentPage);
     loadDataHome(title, currentPage);
 }
 
+/*
+* 向前翻页
+* */
 function loadHomePreviousPage(title) {
     var currentPage = getCurrentPage(title)
     currentPage = currentPage - 1;
@@ -63,12 +120,15 @@ function loadHomePreviousPage(title) {
     loadDataHome(title, currentPage);
 }
 
+/*
+* 向后翻页
+* */
 function loadHomeNextPage(title, currentPage) {
     var currentPage = getCurrentPage(title)
-    if (currentPage) {
-        currentPage = currentPage + 1;
-    } else {
-        currentPage = 1;
+    var totalPage = getTotalPage(title)
+    currentPage = currentPage + 1;
+    if (currentPage > totalPage) {
+        currentPage = totalPage;
     }
     showCurrentPageNumber(title, currentPage);
     loadDataHome(title, currentPage);
@@ -82,5 +142,5 @@ function loadDataHome(title, currentPage) {
 function countDataHome(title) {
     var url = "home/count?key=" + title;
     var total = ajaxCalculate(url);
-
+    return total;
 }
