@@ -15,9 +15,17 @@ class HomeController extends CommonController {
     def systemMenuService
     def systemUserService
 
-    def list() {
-        systemCommonService.updateSystemStatus(request, params)
-        super.list()
+    protected void prepareParams() {
+        if (session.systemUser) {
+            switch (params.key) {
+                case "我的进展":
+                    params.myself = session.systemUser.person()
+                    break
+                case "我的登录":
+                    params.myself = session.userName
+                    break
+            }
+        }
     }
 
     /*

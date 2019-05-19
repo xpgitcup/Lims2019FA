@@ -1,33 +1,23 @@
 //全局变量定义
-var treeViewSystemMenuUl;
+var treeViewSystemMenuDiv;
 
-$(function () {
+$(function(){
+    console.info(document.title + "加载了...");
+    treeViewSystemMenuDiv = $("#treeViewSystemMenuDiv");
+    treeViewSystemMenuDiv.treeview({
+        data: loadTreeViewDataSystemMenu(),
+        collapseIcon: "glyphicon glyphicon-minus"
+    });
+    //treeViewSystemMenuDiv.treeview('collapseAll',{silent: false});
+})
 
-    console.info("加载..." + document.title);
+function loadTreeViewDataSystemMenu() {
+    var url="operation4SystemMenu/getTreeViewData"
+    var json = ajaxCall(url)
+    //console.info(json)
+    return json
+}
 
-    //变量获取
-    treeViewSystemMenuUl = $("#treeViewSystemMenuUl");
-
-    treeViewSystemMenuUl.tree({
-        url: "operation4SystemMenu/getTreeViewData",
-        onSelect: function (node) {
-            console.info("树形结构节点选择：" + node.target.id);
-            sessionStorage.setItem("currentNode" + document.title, node.target.id);
-            treeNodeSelectedSystemMenu(node);
-        },
-        onLoadSuccess: function () {
-            var cnodeid = readStorage("currentNode" + document.title, 0);
-            console.info("上一次：" + cnodeid);
-            treeViewSystemMenuUl.tree("collapseAll");
-            if (cnodeid != 0) {
-                console.info("扩展到：" + cnodeid);
-                var cnode = $("#" + cnodeid);
-                treeViewSystemMenuUl.tree("expandTo", cnode);
-                treeViewSystemMenuUl.tree("select", cnode);
-            }
-        }
-    })
-});
 
 /*
 * 节点选择

@@ -30,12 +30,15 @@
     <!-- 先加载BootStrap-->
     <!--asset:stylesheet src="application.css"/-->
     <asset:stylesheet src="bootstrap.min.css"/>
+    <asset:stylesheet src="bootstrap-treeview/bootstrap-treeview.min.css"/>
 
     <!--JS加载-->
     <asset:javascript src="jquery-3.3.1.min.js"/>
 
     <asset:javascript src="popper.min.js"/>
     <asset:javascript src="bootstrap.js"/>
+
+    <asset:javascript src="bootstrap-treeview/bootstrap-treeview.min.js"/>
 
     <!-- 加载石油大学的设置-->
     <asset:javascript src="cn/edu/cup/common.js"/>

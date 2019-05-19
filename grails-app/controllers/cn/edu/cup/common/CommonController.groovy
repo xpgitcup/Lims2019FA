@@ -13,6 +13,7 @@ class CommonController {
         println("处理后的参数：${params}")
         def result = commonQueryAService.listFunction(params)
         result = processResult(result, params)
+        println("list查询结果：${result}")
         def view = result.view
         flash.message = result.message
         if (request.xhr) {

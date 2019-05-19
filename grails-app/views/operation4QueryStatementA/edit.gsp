@@ -16,14 +16,21 @@
 <!-- end 实现可定制的布局 -->
     <g:set var="entityName" value="${message(code: 'queryStatementA.label', default: 'QueryStatementA')}"/>
     <title><g:message code="default.edit.label" args="[entityName]"/></title>
+
+    <asset:stylesheet src="main.css"/>
 </head>
 
 <body>
 
 <div class="card">
-    <div id="edit-queryStatementA" class="content scaffold-edit" role="main">
-        <h2><g:message code="default.edit.label"
-                       args="[entityName]"/>---${this.queryStatementA.actionName}.${this.queryStatementA.keyString}</h2>
+    <div class="card-header">
+        <h2>
+            <g:message code="default.edit.label" args="[entityName]"/>
+            ${this.queryStatementA.actionName}.${this.queryStatementA.keyString}
+        </h2>
+    </div>
+
+    <div id="edit-queryStatementA" class="card-body">
         <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
         </g:if>
@@ -37,33 +44,32 @@
         </g:hasErrors>
         <g:form id="${this.queryStatementA.id}" action="update" controller="${params.controller}" method="PUT">
             <g:hiddenField name="version" value="${this.queryStatementA?.version}"/>
-            <fieldset class="form">
+            <div>
                 <!--f:all bean="queryStatementA"/-->
-
-                <div class='fieldcontain'>
+                <div class="form-group">
                     <label for='paramsString'>参数列表：</label>
                     ${this.queryStatementA.paramsString}
                 </div>
 
-                <div class='fieldcontain'>
+                <div class='form-group'>
                     <label for='queryString'>Query String</label>
                     <g:textArea name="queryString" value="${this.queryStatementA.queryString}" id="queryString"
                                 style="width:80em; rows:10"/>
                 </div>
 
-                <div class='fieldcontain'>
+                <div class='form-group'>
                     <label for='viewName'>View Name</label>
                     <g:textField name="viewName" value="${this.queryStatementA.viewName}" id="viewName"/>
                 </div>
 
-                <div class='fieldcontain'>
+                <div class='form-check'>
                     <label for='isSQL'>Is SQL</label><input type="hidden" name="_isSQL"/>
                     <input type="checkbox" name="isSQL" id="isSQL"/>
                 </div>
 
                 <g:hiddenField name="nextController" value="${params.nextController}"/>
                 <g:hiddenField name="nextAction" value="${params.nextAction}"/>
-            </fieldset>
+            </div>
             <fieldset class="buttons">
                 <input class="save" type="submit"
                        value="${message(code: 'default.button.update.label', default: 'Update')}"/>

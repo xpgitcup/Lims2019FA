@@ -120,13 +120,27 @@ function loadDataQueryStatementA(currentPage) {
 }
 
 function countDataQueryStatementA() {
-    var url = "operation4QueryStatementA/count?key=" + titleQueryStatementA;
+    var append = appendParams()
+    var url = "operation4QueryStatementA/count?key=" + titleQueryStatementA + append;
     var total = ajaxCalculate(url);
     return total;
 }
 
 function appendParams() {
-    return "";
+    // 根据sessionStorage的参数，设置相应的附加参数，不同的标签的--都在各自页面考虑，所以不带参数
+    var append = ""
+    var filter = readStorage("filter" + document.title, "false");
+    var keyString = readStorage("keyString" + document.title, "");
+    switch (filter) {
+        case "true":
+            append = "待编辑"
+            break;
+        case "like":
+            append = "&like=" + keyString;
+            $("#currentFilter").html(keyString)
+            break
+    }
+    return  append;
 }
 
 
@@ -156,19 +170,6 @@ function loadQueryStatementA(title, page, pageSize) {
 }
 
 function setupAppendParamsQueryStatementA() {
-    // 根据sessionStorage的参数，设置相应的附加参数，不同的标签的--都在各自页面考虑，所以不带参数
-    var append = ""
-    var filter = readStorage("filter" + document.title, "false");
-    var keyString = readStorage("keyString" + document.title, "");
-    switch (filter) {
-        case "true":
-            append = "待编辑"
-            break;
-        case "like":
-            append = "&like=" + keyString;
-            $("#currentFilter").html(keyString)
-            break
-    }
 
     return append;
 }
