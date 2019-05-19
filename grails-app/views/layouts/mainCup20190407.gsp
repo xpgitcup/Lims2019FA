@@ -47,7 +47,7 @@
 
 <body>
 
-<div class="container-fluid bgCup m-0">
+<div class="container-fluid  m-0">
     <!--第一行的内容 -->
     <div class="row m-0 p-0">
         <div class="col-lg-4 m-0 p-0">
@@ -125,11 +125,6 @@
 
 </div>
 
-<div class="" title="数据交换">
-    <g:each in="${cn.edu.cup.system.SystemStatus.findBySessionId(session.id)?.statusParameters}" var="item">
-        <div id="${item.statusKey}">${item.statusValue}</div>
-    </g:each>
-</div>
 
 <!--asset:javascript src="application.js"/-->
 

@@ -22,7 +22,7 @@ function setupPaginationHome () {
         $("#" + currentPageName).html(currentPage);
         // 页长度
         var pageSizeName = "pageSizeHome" + title;
-        var pageSize = 10;
+        var pageSize = 5;
         if (localStorage.hasOwnProperty(pageSizeName)) {
             pageSize = parseInt(localStorage.getItem(pageSizeName))
         } else {

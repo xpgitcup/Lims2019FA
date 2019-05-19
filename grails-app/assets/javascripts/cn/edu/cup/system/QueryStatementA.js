@@ -28,7 +28,7 @@ function setupPaginationQueryStatementA () {
     }
     $("#" + pageSizeName).html(pageSize);
     // 总页数
-    var total = countDataQueryStatementA(titleQueryStatementA);
+    var total = countDataQueryStatementA();
     var totalPageName = "totalPageQueryStatementA" + titleQueryStatementA;
     var totalPage =  Math.ceil(total/pageSize)
     $("#" + totalPageName).html(totalPage)
@@ -128,8 +128,6 @@ function countDataQueryStatementA() {
 function appendParams() {
     return "";
 }
-
-
 
 
 /*

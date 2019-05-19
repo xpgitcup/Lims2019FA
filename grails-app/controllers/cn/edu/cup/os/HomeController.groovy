@@ -112,8 +112,8 @@ class HomeController extends CommonController {
         def ctx = request.session.servletContext
         List serviceUserList = (List) ctx.getAttribute("serviceUserList");
         //println("ctx: ${serviceUserList}")
-        def cc = SystemStatus.countBySessionIdInList(serviceUserList)
-        def users = SystemStatus.findAllBySessionIdInList(serviceUserList)
+        def cc = SystemStatus.countBySessionIdInListAndUserNameIsNotNull(serviceUserList)
+        def users = SystemStatus.findAllBySessionIdInListAndUserNameIsNotNull(serviceUserList)
         //println("在线：${users}")
         def usersStr = ""
         if (users.size() < 3) {

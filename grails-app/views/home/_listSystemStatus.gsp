@@ -19,12 +19,9 @@
 </head>
 
 <body>
-<a href="#list-systemStatus" class="skip" tabindex="-1"><g:message code="default.link.skip.label"
-                                                                   default="Skip to content&hellip;"/></a>
-
-<div id="list-systemStatus" class="content scaffold-list" role="main">
+<div id="list-systemStatus" class="card">
     <!--f:table collection="${objectList}"/-->
-    <table>
+    <table class="table table-striped m-0 p-0">
         <thead>
         <th>用户名</th>
         <th>IP</th>

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<div id="list-progress" class="content scaffold-list" role="main">
+<div id="list-progress" class="card">
     <g:if test="${flash.message}">
         <div class="message" role="status">${flash.message}</div>
     </g:if>
@@ -9,7 +9,7 @@
     </g:if>
     <g:else>
         <!--f:table collection="${objectList}"/-->
-        <table>
+        <table class="table table-striped table-ellipsis m-0 p-0">
             <thead>
             <th>前情</th>
             <th>状态</th>
