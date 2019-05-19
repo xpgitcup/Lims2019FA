@@ -63,38 +63,40 @@
 
 <div class="container-fluid">
     <!-- 具体卡片-->
-    <div class="panel">
+    <div class="card">
         <!--具体的查询维护标签-->
-        <div id="display查询维护Div" class="panel">
+        <div id="display查询维护Div" class="card-body">
             <br> 在这里显示查询维护所需的信息</br>
         </div>
-        <!-- 这里是分页设置-->
-        <ul class="pagination pagination-sm">
-            <li class="page-item">
-                <a class="page-link">页长</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" id="pageSizeQueryStatementA查询维护"></a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="javascript: loadQueryStatementAPreviousPage('查询维护')">&laquo</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" id="currentPageQueryStatementA查询维护"></a>
-            </li>
-            <li class="page-item">
-                <a class="page-link">/</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" id="totalPageQueryStatementA查询维护"></a>
-            </li>
-            <li>
-                <a class="page-link" href="javascript: loadQueryStatementANextPage('查询维护')">&raquo</a>
-            </li>
-        </ul>
+
+        <div class="card-footer justify-content-center  m-0 pb-0">
+            <!-- 这里是分页设置-->
+            <ul class="pagination pagination-sm">
+                <li class="page-item">
+                    <a class="page-link">页长</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" id="pageSizeQueryStatementA查询维护"></a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="javascript: loadQueryStatementAPreviousPage('查询维护')">&laquo</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" id="currentPageQueryStatementA查询维护"></a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link">/</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" id="totalPageQueryStatementA查询维护"></a>
+                </li>
+                <li>
+                    <a class="page-link" href="javascript: loadQueryStatementANextPage('查询维护')">&raquo</a>
+                </li>
+            </ul>
+        </div>
         <!--具体的查询维护标签结束======-->
     </div>
-
 </div>
 
 <g:if test="${flash.message}">

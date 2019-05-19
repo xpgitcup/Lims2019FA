@@ -1,4 +1,4 @@
-$(function () {
+$(function(){
     console.info(document.title + "加载了...")
     setupPaginationHome();
     setupTabsHome();
@@ -7,7 +7,7 @@ $(function () {
 /*
 * 初始化分页参数
 * */
-function setupPaginationHome() {
+function setupPaginationHome () {
     // 对每个标签进行操作
     var tabs = $("a.nav-link");
     tabs.each(function (e) {
@@ -32,14 +32,14 @@ function setupPaginationHome() {
         // 总页数
         var total = countDataHome(title);
         var totalPageName = "totalPageHome" + title;
-        var totalPage = Math.ceil(total / pageSize)
+        var totalPage =  Math.ceil(total/pageSize)
         $("#" + totalPageName).html(totalPage)
     })
 
 }
 
 function setupTabsHome() {
-    var currentTabName = "currentTabHome";
+    var currentTabName = "currentTabHome登录前";
     // 每个标签绑定数据加载函数
     $("a.nav-link").on("click", function (e) {
         var title = $(e.target).text().trim();
@@ -79,7 +79,7 @@ function showCurrentPageNumber(title, currentPageNumber) {
 * 获取当前页---从localStorage中获取
 * */
 function getCurrentPage(title) {
-    var currentPageName = "currentPageHome" + title;
+    var currentPageName ="currentPageHome" + title;
     var currentPageNumber
     if (localStorage.hasOwnProperty(currentPageName)) {
         currentPageNumber = parseInt(localStorage.getItem(currentPageName))
@@ -97,6 +97,15 @@ function getTotalPage(title) {
     var totalPageName = "totalPageHome" + title;
     var totalPage = parseInt($("#" + totalPageName).html());
     return totalPage;
+}
+
+/*
+* 获取页面长度
+* */
+function getPageSize(title) {
+    var pageSizeName = "pageSizeHome" + title;
+    var pageSize = parseInt(localStorage.getItem(pageSizeName))
+    return pageSize
 }
 
 /*
@@ -135,7 +144,10 @@ function loadHomeNextPage(title, currentPage) {
 }
 
 function loadDataHome(title, currentPage) {
-    var url = "home/list?key=" + title + "&currentPageHome" + title + "=" + currentPage;
+    var pageSize = getPageSize(title)
+    var pageParams = getParams(currentPage, pageSize)
+    var append = appendParams(title)
+    var url = "home/list" + pageParams + "&key=" + title + append;
     ajaxRun(url, 0, "display" + title + "Div");
 }
 
@@ -143,4 +155,8 @@ function countDataHome(title) {
     var url = "home/count?key=" + title;
     var total = ajaxCalculate(url);
     return total;
+}
+
+function appendParams(title) {
+    return "";
 }

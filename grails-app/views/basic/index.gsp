@@ -26,7 +26,7 @@
 
 <body>
 
-<div class="easyui-panel">
+<div class="card">
     <div id="controllers" role="navigation">
         <h2>Available Controllers:</h2>
         <ul>

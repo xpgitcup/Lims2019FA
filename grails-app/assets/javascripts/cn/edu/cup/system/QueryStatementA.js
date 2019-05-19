@@ -1,4 +1,4 @@
-var title = "查询维护"
+var titleQueryStatementA = "查询维护"
 
 $(function(){
     console.info(document.title + "加载了...")
@@ -10,17 +10,16 @@ $(function(){
 * 初始化分页参数
 * */
 function setupPaginationQueryStatementA () {
-    // 对每个标签进行操作
-    console.info("处理：" + title + "!");
+    console.info("处理：" + titleQueryStatementA + "!");
     // 当前页
-    var currentPageName = "currentPageQueryStatementA" + title;
+    var currentPageName = "currentPageQueryStatementA" + titleQueryStatementA;
     var currentPage = 1;
     if (localStorage.hasOwnProperty(currentPageName)) {
         currentPage = parseInt(localStorage.getItem(currentPageName));
     }
     $("#" + currentPageName).html(currentPage);
     // 页长度
-    var pageSizeName = "pageSizeQueryStatementA" + title;
+    var pageSizeName = "pageSizeQueryStatementA" + titleQueryStatementA;
     var pageSize = 10;
     if (localStorage.hasOwnProperty(pageSizeName)) {
         pageSize = parseInt(localStorage.getItem(pageSizeName))
@@ -29,8 +28,8 @@ function setupPaginationQueryStatementA () {
     }
     $("#" + pageSizeName).html(pageSize);
     // 总页数
-    var total = countDataQueryStatementA(title);
-    var totalPageName = "totalPageQueryStatementA" + title;
+    var total = countDataQueryStatementA(titleQueryStatementA);
+    var totalPageName = "totalPageQueryStatementA" + titleQueryStatementA;
     var totalPage =  Math.ceil(total/pageSize)
     $("#" + totalPageName).html(totalPage)
 }
@@ -39,7 +38,7 @@ function setupPaginationQueryStatementA () {
 * 同时存储到两个地方
 * */
 function showCurrentPageNumber(currentPageNumber) {
-    var currentPageName = "currentPageQueryStatementA" + title
+    var currentPageName = "currentPageQueryStatementA" + titleQueryStatementA
     $("#" + currentPageName).html(currentPageNumber);
     localStorage.setItem(currentPageName, currentPageNumber);
 }
@@ -48,7 +47,7 @@ function showCurrentPageNumber(currentPageNumber) {
 * 获取当前页---从localStorage中获取
 * */
 function getCurrentPage() {
-    var currentPageName ="currentPageQueryStatementA" + title;
+    var currentPageName ="currentPageQueryStatementA" + titleQueryStatementA;
     var currentPageNumber
     if (localStorage.hasOwnProperty(currentPageName)) {
         currentPageNumber = parseInt(localStorage.getItem(currentPageName))
@@ -63,9 +62,18 @@ function getCurrentPage() {
 * 获取页码上限
 * */
 function getTotalPage() {
-    var totalPageName = "totalPageQueryStatementA" + title;
+    var totalPageName = "totalPageQueryStatementA" + titleQueryStatementA;
     var totalPage = parseInt($("#" + totalPageName).html());
     return totalPage;
+}
+
+/*
+* 获取页面长度
+* */
+function getPageSize() {
+    var pageSizeName = "pageSizeQueryStatementA" + titleQueryStatementA;
+    var pageSize = parseInt(localStorage.getItem(pageSizeName))
+    return pageSize
 }
 
 /*
@@ -73,7 +81,7 @@ function getTotalPage() {
 * */
 function loadQueryStatementACurrentPage() {
     var currentPage = getCurrentPage()
-    loadDataQueryStatementA(title, currentPage);
+    loadDataQueryStatementA(currentPage);
 }
 
 /*
@@ -86,13 +94,13 @@ function loadQueryStatementAPreviousPage() {
         currentPage = 1;
     }
     showCurrentPageNumber(currentPage);
-    loadDataQueryStatementA(title, currentPage);
+    loadDataQueryStatementA(currentPage);
 }
 
 /*
 * 向后翻页
 * */
-function loadQueryStatementANextPage(currentPage) {
+function loadQueryStatementANextPage() {
     var currentPage = getCurrentPage()
     var totalPage = getTotalPage()
     currentPage = currentPage + 1;
@@ -104,15 +112,25 @@ function loadQueryStatementANextPage(currentPage) {
 }
 
 function loadDataQueryStatementA(currentPage) {
-    var url = "operation4QueryStatementA/list?key=" + title + "&currentPageQueryStatementA" + title + "=" + currentPage;
-    ajaxRun(url, 0, "display" + title + "Div");
+    var pageSize = getPageSize()
+    var pageParams = getParams(currentPage, pageSize)
+    var append = appendParams()
+    var url = "operation4QueryStatementA/list" + pageParams + "&key=" + titleQueryStatementA + append;
+    ajaxRun(url, 0, "display" + titleQueryStatementA + "Div");
 }
 
 function countDataQueryStatementA() {
-    var url = "operation4QueryStatementA/count?key=" + title;
+    var url = "operation4QueryStatementA/count?key=" + titleQueryStatementA;
     var total = ajaxCalculate(url);
     return total;
 }
+
+function appendParams() {
+    return "";
+}
+
+
+
 
 /*
 * 统计函数

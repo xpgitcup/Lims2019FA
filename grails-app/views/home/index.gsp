@@ -23,7 +23,7 @@
 <div class="container-fluid">
 
     <!-- 选项卡 -->
-    <ul class="nav nav-tabs" role="tablist">
+    <ul class="nav nav-tabs" role="tablist" title="登录后">
         <li class="nav-item">
             <a href="#div我的科研" class="nav-link" data-toggle="tab">
                 我的科研

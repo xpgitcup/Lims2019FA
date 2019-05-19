@@ -39,7 +39,7 @@ function setupPaginationHome () {
 }
 
 function setupTabsHome() {
-    var currentTabName = "currentTabHome";
+    var currentTabName = "currentTabHome登录后";
     // 每个标签绑定数据加载函数
     $("a.nav-link").on("click", function (e) {
         var title = $(e.target).text().trim();
@@ -100,6 +100,15 @@ function getTotalPage(title) {
 }
 
 /*
+* 获取页面长度
+* */
+function getPageSize(title) {
+    var pageSizeName = "pageSizeHome" + title;
+    var pageSize = parseInt(localStorage.getItem(pageSizeName))
+    return pageSize
+}
+
+/*
 * 加载当前页数据
 * */
 function loadHomeCurrentPage(title) {
@@ -135,7 +144,10 @@ function loadHomeNextPage(title, currentPage) {
 }
 
 function loadDataHome(title, currentPage) {
-    var url = "home/list?key=" + title + "&currentPageHome" + title + "=" + currentPage;
+    var pageSize = getPageSize(title)
+    var pageParams = getParams(currentPage, pageSize)
+    var append = appendParams(title)
+    var url = "home/list" + pageParams + "&key=" + title + append;
     ajaxRun(url, 0, "display" + title + "Div");
 }
 
@@ -143,4 +155,8 @@ function countDataHome(title) {
     var url = "home/count?key=" + title;
     var total = ajaxCalculate(url);
     return total;
+}
+
+function appendParams(title) {
+    return "";
 }

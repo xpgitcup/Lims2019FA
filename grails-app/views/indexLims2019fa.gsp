@@ -73,15 +73,15 @@
 <div class="container-fluid">
 
     <!-- 选项卡 -->
-    <ul class="nav nav-tabs" role="tablist">
+    <ul class="nav nav-tabs" role="tablist" title="登录前">
         <li class="nav-item">
             <a href="#div当前进度" class="nav-link" data-toggle="tab">
                 当前进度
             </a>
         </li>
         <li class="nav-item">
-            <a href="#div登录信息" class="nav-link" data-toggle="tab">
-                登录信息
+            <a href="#div登陆情况" class="nav-link" data-toggle="tab">
+                登陆情况
             </a>
         </li>
     </ul>
@@ -120,11 +120,11 @@
             </ul>
         </div>
         <!--具体的当前进度标签结束======-->
-        <!--具体的登录信息标签-->
-        <div id="div登录信息" class="tab-pane">
-            <div id="display登录信息Div">
-                <br class="panel text-white" id="display登录信息Div">
-                <br> 在这里显示登录信息所需的信息</br>
+        <!--具体的登陆情况标签-->
+        <div id="div登陆情况" class="tab-pane">
+            <div id="display登陆情况Div">
+                <br class="panel text-white" id="display登陆情况Div">
+                <br> 在这里显示登陆情况所需的信息</br>
             </div>
             <!-- 这里是分页设置-->
             <ul class="pagination pagination-sm">
@@ -132,26 +132,26 @@
                     <a class="page-link">页长</a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" id="pageSizeHome登录信息"></a>
+                    <a class="page-link" id="pageSizeHome登陆情况"></a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" href="javascript: loadHomePreviousPage('登录信息')">&laquo</a>
+                    <a class="page-link" href="javascript: loadHomePreviousPage('登陆情况')">&laquo</a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" id="currentPageHome登录信息"></a>
+                    <a class="page-link" id="currentPageHome登陆情况"></a>
                 </li>
                 <li class="page-item">
                     <a class="page-link">/</a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" id="totalPageHome登录信息"></a>
+                    <a class="page-link" id="totalPageHome登陆情况"></a>
                 </li>
                 <li>
-                    <a class="page-link" href="javascript: loadHomeNextPage('登录信息')">&raquo</a>
+                    <a class="page-link" href="javascript: loadHomeNextPage('登陆情况')">&raquo</a>
                 </li>
             </ul>
         </div>
-        <!--具体的登录信息标签结束======-->
+        <!--具体的登陆情况标签结束======-->
 
     </div>
 
