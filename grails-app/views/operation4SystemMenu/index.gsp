@@ -26,6 +26,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>${entityName}</title>
     <asset:javascript src="cn/edu/cup/system/${entityName}.js"/>
+    <!--特殊需要-->
+    <asset:stylesheet src="main.css"/>
 </head>
 
 <body>
@@ -41,7 +43,7 @@
             </ul>
 
             <div class="card">
-                <div id="echarts1Div" style="height: 400px" title="1"></div>
+                <div id="echartsSystemMenuDiv" style="height: 400px" title="菜单维护"></div>
             </div>
         </div>
 
@@ -53,6 +55,9 @@
                        href="operation4SystemMenu/exportToJsonFile?fileName=config/out/systemMenu.json"
                        class="save">导出Json文件</a></li>
             </ul>
+            <div class="card">
+                <div id="showSystemMenuDiv"></div>
+            </div>
         </div>
     </div>
 </div>

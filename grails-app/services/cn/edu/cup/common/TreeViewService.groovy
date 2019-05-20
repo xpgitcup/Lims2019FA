@@ -9,6 +9,7 @@ class TreeViewService extends GenericService {
     * 创建对象列表的树形显示字符串，基于EasyUI
     * 这是调用的入口
     * */
+
     def createTreeViewString(objects, params, JsFrame jsFrame) {
 
         def result = []
@@ -29,6 +30,7 @@ class TreeViewService extends GenericService {
     * 2016.12.17
     * 生成节点的Map
     * */
+
     def generateNodesString(objects, params, JsFrame jsFrame) {
         def result = []
 
@@ -48,7 +50,15 @@ class TreeViewService extends GenericService {
                 //println "使用方法....${tempText}"
             }
             //emap.put("nodeId", e.id)  //这个没有用，系统会自己定义节点编号
-            emap.put("text", tempText)
+            switch (jsFrame) {
+                case JsFrame.EasyUI:
+                case JsFrame.BootStrap:
+                    emap.put("text", tempText)  //
+                    break
+                case JsFrame.BaiduECharts:
+                    emap.put("name", tempText)  //
+                    break
+            }
             //处理属性
             if (itemAttributes.size() > 0) {
                 def attrs = []
@@ -60,8 +70,11 @@ class TreeViewService extends GenericService {
                     case JsFrame.EasyUI:
                         emap.put("attributes", attrs)
                         break
-                    case jsFrame.BootStrap:
+                    case JsFrame.BootStrap:
                         emap.put("tags", attrs)
+                        break
+                    case JsFrame.BaiduECharts:
+                        emap.put("value", attrs)
                         break
                 }
             }
@@ -73,6 +86,7 @@ class TreeViewService extends GenericService {
                 //根据框架选择不同的字符串
                 switch (jsFrame) {
                     case JsFrame.EasyUI:
+                    case JsFrame.BaiduECharts:
                         emap.put("children", childrenmap) //对于EasyUI使用children
                         break
                     case JsFrame.BootStrap:

@@ -50,8 +50,11 @@ class Operation4SystemMenuController extends SystemMenuController {
         params.context = "menuContext"
         params.subItems = "menuItems"
         params.attributes = "id"    //
-        def result = treeViewService.generateNodesString(data, params, JsFrame.BootStrap)
-        //println("${result}")
+        def treeData = treeViewService.generateNodesString(data, params, JsFrame.BaiduECharts)
+        // echarts-的树要作如下处理
+        def result = [:]
+        result.put("name", "系统菜单")
+        result.put("children", treeData)
         if (request.xhr) {
             render result as JSON
         } else {

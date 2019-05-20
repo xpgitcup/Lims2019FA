@@ -1,38 +1,73 @@
-//全局变量定义
-var title1 = "1"
-var echarts1Div;
+var titleSystemMenu= "菜单维护"
+var echartsSystemMenuDiv;
 
-$(function(){
+$(function () {
     console.info(document.title + "加载了...")
-    echarts1Div = echarts.init(document.getElementById('echarts1Div'));
+    echartsSystemMenuDiv = echarts.init(document.getElementById('echartsSystemMenuDiv'));
     // 指定图表的配置项和数据
+    var treeData = loadTreeViewDataSystemMenu();
     var option = {
-        title: {
-            text: 'ECharts 入门示例'
+        tooltip: {
+            trigger: 'item',
+            triggerOn: 'mousemove'
         },
-        tooltip: {},
         legend: {
-            data:['销量']
+            top: '2%',
+            left: '3%',
+            orient: 'vertical',
+            data: [{name: '菜单维护', icon: 'rectangle'}],
+            borderColor: '#c23531'
         },
-        xAxis: {
-            data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
-        },
-        yAxis: {},
-        series: [{
-            name: '销量',
-            type: 'bar',
-            data: [5, 20, 36, 10, 10, 20]
-        }]
-    };
+        series: [
+            {
+                type: 'tree',
+                name: '菜单维护',
+                data: [treeData],
+                top: '5%',
+                left: '7%',
+                bottom: '2%',
+                right: '60%',
+                symbolSize: 17,
+                label: {
+                    normal: {
+                        position: 'left',
+                        verticalAlign: 'middle',
+                        align: 'right'
+                    }
+                },
+                // 叶子设置
+                leaves: {
+                    label: {
+                        normal: {
+                            position: 'right',
+                            verticalAlign: 'middle',
+                            align: 'left'
+                        }
+                    }
+                },
 
+                expandAndCollapse: true,
+                animationDuration: 550,
+                animationDurationUpdate: 750
+            }
+        ]
+    }
     // 使用刚指定的配置项和数据显示图表。
-    echarts1Div.setOption(option);
+    echartsSystemMenuDiv.setOption(option);
+    // 事件处理
+    echartsSystemMenuDiv.on('click', function (params) {
+            //console.info(params.name); 节点的名称
+            var node = params.value // 附加的属性，很有用的
+            //请根据需要替换
+            treeNodeSelectedSystemMenu(node);
+        }
+    )
 })
 
-function loadTreeViewDataSystemMenu() {
-    var url="operation4SystemMenu/getTreeViewData"
+function loadTreeViewDataSystemMenu()
+{
+    var url = "operation4SystemMenu/getTreeViewData"
     var json = ajaxCall(url)
-    //console.info(json)
     return json
 }
 
@@ -43,8 +78,8 @@ function loadTreeViewDataSystemMenu() {
 function treeNodeSelectedSystemMenu(node) {
     console.info("选择" + node);
     if (node) {
-        $("#createSystemMenu").attr('href', 'javascript: createSystemMenu(' + node.attributes[0] + ')');
-        var id = node.attributes[0];
+        $("#createSystemMenu").attr('href', 'javascript: createSystemMenu(' + node[0] + ')');
+        var id = node[0];
         ajaxRun("operation4SystemMenu/getSystemMenu", id, "showSystemMenuDiv");
     }
 }

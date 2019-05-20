@@ -11,7 +11,7 @@
  Target Server Version : 50627
  File Encoding         : 65001
 
- Date: 03/05/2019 10:59:40
+ Date: 20/05/2019 15:35:59
 */
 
 SET NAMES utf8mb4;
@@ -38,7 +38,7 @@ CREATE TABLE `thing`  (
   INDEX `FK5odgcdreoq3kaqqlaypyx7ku6`(`teacher_id`) USING BTREE,
   CONSTRAINT `FK3jv5lg4546jticrnr46rl9i6f` FOREIGN KEY (`thing_type_id`) REFERENCES `thing_type` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FK5odgcdreoq3kaqqlaypyx7ku6` FOREIGN KEY (`teacher_id`) REFERENCES `person` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of thing
@@ -60,5 +60,11 @@ INSERT INTO `thing` VALUES (16, 0, '2016.硕士论文.韦宝成', 17, 'cn.edu.cu
 INSERT INTO `thing` VALUES (17, 0, '2016.硕士论文.陈影', 17, 'cn.edu.cup.lims.Course', 2, '2018-2019-2', NULL, NULL, NULL);
 INSERT INTO `thing` VALUES (18, 0, '2016.硕士论文.万洋洋', 17, 'cn.edu.cup.lims.Course', 2, '2018-2019-2', NULL, NULL, NULL);
 INSERT INTO `thing` VALUES (19, 0, '2016.硕士论文.金浩', 17, 'cn.edu.cup.lims.Course', 2, '2018-2019-2', NULL, NULL, NULL);
+INSERT INTO `thing` VALUES (20, 0, '课堂教学.2018-2019-2', 8, 'cn.edu.cup.lims.Course', 1, '2018-2019-2', NULL, NULL, NULL);
+INSERT INTO `thing` VALUES (21, 0, '纳米微波', 7, 'cn.edu.cup.lims.Project', NULL, NULL, '2016-01-01 00:00:00', '北京石油化工学院', 3);
+INSERT INTO `thing` VALUES (22, 0, '2016.硕士论文.苏越', 17, 'cn.edu.cup.lims.Course', 1, '2018-2019-2', NULL, NULL, NULL);
+INSERT INTO `thing` VALUES (23, 0, '2016.硕士论文.王茀玺', 17, 'cn.edu.cup.lims.Course', 1, '2018-2019-2', NULL, NULL, NULL);
+INSERT INTO `thing` VALUES (24, 0, '2016.硕士论文.崔可心', 17, 'cn.edu.cup.lims.Course', 1, '2018-2019-2', NULL, NULL, NULL);
+INSERT INTO `thing` VALUES (25, 0, '顺北项目', 7, 'cn.edu.cup.lims.Project', NULL, NULL, '2018-01-01 00:00:00', '西北局', 2);
 
 SET FOREIGN_KEY_CHECKS = 1;

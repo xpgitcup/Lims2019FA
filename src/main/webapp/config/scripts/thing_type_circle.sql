@@ -11,7 +11,7 @@
  Target Server Version : 50627
  File Encoding         : 65001
 
- Date: 03/05/2019 10:59:21
+ Date: 20/05/2019 15:36:21
 */
 
 SET NAMES utf8mb4;
@@ -31,7 +31,7 @@ CREATE TABLE `thing_type_circle`  (
   INDEX `FKssm8med14m6dsxrdrx28o1qfo`(`thing_type_id`) USING BTREE,
   CONSTRAINT `FK1dbela98vlo3e0iyjuamvulvj` FOREIGN KEY (`person_title_id`) REFERENCES `person_title` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   CONSTRAINT `FKssm8med14m6dsxrdrx28o1qfo` FOREIGN KEY (`thing_type_id`) REFERENCES `thing_type` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of thing_type_circle
@@ -45,5 +45,6 @@ INSERT INTO `thing_type_circle` VALUES (6, 0, 17, 12);
 INSERT INTO `thing_type_circle` VALUES (7, 0, 2, 18);
 INSERT INTO `thing_type_circle` VALUES (8, 0, 17, 18);
 INSERT INTO `thing_type_circle` VALUES (9, 0, 13, 16);
+INSERT INTO `thing_type_circle` VALUES (10, 0, 17, 17);
 
 SET FOREIGN_KEY_CHECKS = 1;
