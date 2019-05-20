@@ -68,6 +68,7 @@ function loadTreeViewDataSystemMenu()
 {
     var url = "operation4SystemMenu/getTreeViewData"
     var json = ajaxCall(url)
+    console.info(json)
     return json
 }
 

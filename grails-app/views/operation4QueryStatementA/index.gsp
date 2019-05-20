@@ -31,27 +31,27 @@
 <body>
 
 <div class="container-fluid ">
-    <ul id="operation4QueryStatementUl" class="nav bg-light">
-        <li class="nav-item p-1">
+    <ul id="operation4QueryStatementUl" class="nav navbar bg-light">
+        <li>
             <a href="operation4QueryStatementA/exportToJsonFileName?fileName=config/out/queryStatementS"
                class="save">阿里导出Json文件</a>
         </li>
-        <li class="nav-item p-1">
+        <li>
             <a href="operation4QueryStatementA/backup2file" class="save">备份SQL文件</a>
         </li>
-        <li class="nav-item p-1">
+        <li>
             <a href="operation4QueryStatementA/importFromJsonFile?fileName=config/queryStatement.json"
                class="create">从Json文件导入</a>
         </li>
-        <li class="nav-item p-1">
+        <li>
             <a id="filter" href="javascript: listToDo()">待编辑&完成</a>
         </li>
-        <li class="nav-item p-1">当前筛选条件</li>
+        <li>当前筛选条件</li>
         <li id="currentFilter" style="color: red">${keyString}</li>
-        <li class="nav-item p-1">
+        <li>
             <a href="javascript: clearFilter()">清除筛选条件</a>
         </li>
-        <li class="nav-item p-1">
+        <li>
             <g:form onsubmit="return queryStatement()">
                 <label>关键字</label>
                 <input type="text" id="keyString" name="keyString" value=""/>
@@ -79,7 +79,10 @@
                     <a class="page-link" id="pageSizeQueryStatementA查询维护"></a>
                 </li>
                 <li class="page-item">
-                    <a class="page-link" href="javascript: loadQueryStatementAPreviousPage('查询维护')">&laquo</a>
+                    <a class="page-link" href="javascript: loadQueryStatementAFirstPage()">首页</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="javascript: loadQueryStatementAPreviousPage()">&laquo</a>
                 </li>
                 <li class="page-item">
                     <a class="page-link" id="currentPageQueryStatementA查询维护"></a>
@@ -91,7 +94,10 @@
                     <a class="page-link" id="totalPageQueryStatementA查询维护"></a>
                 </li>
                 <li>
-                    <a class="page-link" href="javascript: loadQueryStatementANextPage('查询维护')">&raquo</a>
+                    <a class="page-link" href="javascript: loadQueryStatementANextPage()">&raquo</a>
+                </li>
+                <li>
+                    <a class="page-link" href="javascript: loadQueryStatementALastPage()">末页</a>
                 </li>
             </ul>
         </div>

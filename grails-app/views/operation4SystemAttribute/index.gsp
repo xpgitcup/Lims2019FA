@@ -8,7 +8,6 @@
 
 <html>
 <head>
-<!--meta name="layout" content="main"/-->
 <!-- 实现可定制的布局 -->
     <g:if test="${layout}">
         <meta name="layout" content="${layout}"/>
@@ -21,43 +20,42 @@
             <meta name="layout" content="main"/>
         </g:else>
     </g:else>
-<!-- end 实现可定制的布局 -->
-    <g:set var="entityName" value="SystemMenu"/>
+    <g:set var="entityName" value="SystemAttribute"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>${entityName}</title>
+    <title>${entityName}维护</title>
     <asset:javascript src="cn/edu/cup/system/${entityName}.js"/>
 </head>
 
 <body>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-6">
             <ul class="nav navbar bg-light">
                 <li>
                     <a class="list">
-                        系统菜单维护——(重新登录后，更新)
+                        系统属性维护——(重新登录后，更新)
                     </a>
                 </li>
             </ul>
 
             <div class="card">
-                <div id="echartsSystemMenuDiv" style="height: 400px" title="菜单维护"></div>
+                <div id="echartsSystemAttributeDiv" style="height: 400px" title="权限维护"></div>
             </div>
         </div>
 
         <div class="col-6">
             <ul class="nav navbar bg-light">
-                <li><a class="create" href="javascript: createSystemMenu(0)">新建根节点</a></li>
-                <li><a id="createSystemMenu" class="create" href="#">新建子节点</a></li>
-                <li><a id="exportSystemMenu"
-                       href="operation4SystemMenu/exportToJsonFile?fileName=config/out/systemMenu.json"
-                       class="save">导出Json文件</a></li>
+                <li><a class="create" href="javascript: createSystemAttribute(0)">新建根节点</a></li>
+                <li><a id="createSystemAttribute" class="create" href="#">新建子节点</a></li>
             </ul>
+
             <div class="card">
-                <div id="showSystemMenuDiv"></div>
+                <div id="showSystemAttributeDiv"></div>
             </div>
         </div>
     </div>
 </div>
+
 </body>
 </html>

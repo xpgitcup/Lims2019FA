@@ -32,6 +32,8 @@
     <asset:stylesheet src="bootstrap.min.css"/>
     <!--asset:stylesheet src="bootstrap-treeview/bootstrap-treeview.min.css"/-->
 
+    <asset:stylesheet src="main.css"/>
+
     <!--JS加载-->
     <asset:javascript src="jquery-3.3.1.min.js"/>
 
@@ -86,10 +88,7 @@
             <ul class="list-unstyled text-right">
                 <g:if test="${session.systemUser}">
                     <li class="list-group-item m-0 p-0">
-                        当前：${session.userName}
-                    </li>
-                    <li class="list-group-item m-0 p-0">
-                        身份：${session.userTitle}
+                        当前：${session.userName}/${session.userTitle}
                     </li>
                     <li class="list-group-item m-0 p-0">
                         <a href="${createLink(uri: '/home/changePasswordUI')}">修改密码</a>
@@ -107,6 +106,7 @@
         </div>
     </div>
 
+    <div class="row m-2"></div>
 
     <!--第3行-->
     <g:layoutBody/>
@@ -130,7 +130,6 @@
     </div>
 
 </div>
-
 
 <!--asset:javascript src="application.js"/-->
 

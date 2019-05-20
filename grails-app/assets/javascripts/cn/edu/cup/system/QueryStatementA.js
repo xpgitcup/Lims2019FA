@@ -77,6 +77,25 @@ function getPageSize() {
 }
 
 /*
+* 加载末页数据
+* */
+function loadQueryStatementALastPage() {
+    var totalPageName = "totalPageQueryStatementA" + titleQueryStatementA;
+    var currentPage = parseInt($("#" + totalPageName).html())
+    showCurrentPageNumber(currentPage);
+    loadDataQueryStatementA(currentPage);
+}
+
+/*
+* 加载首页数据
+* */
+function loadQueryStatementAFirstPage() {
+    var currentPage = 1
+    showCurrentPageNumber(currentPage);
+    loadDataQueryStatementA(currentPage);
+}
+
+/*
 * 加载当前页数据
 * */
 function loadQueryStatementACurrentPage() {

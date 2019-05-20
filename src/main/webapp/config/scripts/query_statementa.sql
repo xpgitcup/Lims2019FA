@@ -11,7 +11,7 @@
  Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 19/05/2019 23:40:04
+ Date: 20/05/2019 22:38:06
 */
 
 SET NAMES utf8mb4;
@@ -34,7 +34,7 @@ CREATE TABLE `query_statementa`  (
   `key_string` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `view_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of query_statementa
@@ -58,5 +58,10 @@ INSERT INTO `query_statementa` VALUES (25, 1, '2019-05-19 22:42:44', NULL, 'oper
 INSERT INTO `query_statementa` VALUES (26, 0, '2019-05-19 22:54:13', NULL, 'home', b'0', 'count', '[]', NULL, '我的进展', NULL);
 INSERT INTO `query_statementa` VALUES (27, 0, '2019-05-19 22:54:13', NULL, 'home', b'0', 'count', '[]', NULL, '我的登录', NULL);
 INSERT INTO `query_statementa` VALUES (28, 0, '2019-05-19 22:54:13', NULL, 'home', b'0', 'list', '[max, offset]', NULL, '我的进展', NULL);
+INSERT INTO `query_statementa` VALUES (29, 0, '2019-05-20 19:49:48', NULL, 'operation4SystemUser', b'0', 'list', '[max, offset]', NULL, 'SystemUser', NULL);
+INSERT INTO `query_statementa` VALUES (30, 1, '2019-05-20 20:20:11', NULL, 'operation4SystemUser', b'0', 'count', '[]', 'select count(*) from SystemUser systemUser', '用户维护', NULL);
+INSERT INTO `query_statementa` VALUES (31, 2, '2019-05-20 20:20:12', NULL, 'operation4SystemUser', b'0', 'list', '[max, offset]', 'from SystemUser systemUser order by userName', '用户维护', 'listSystemUser');
+INSERT INTO `query_statementa` VALUES (32, 1, '2019-05-20 21:33:17', NULL, 'operation4SystemUser', b'0', 'count', '[like]', 'select count(*) from SystemUser systemUser where appendAttribute like :like', '用户维护', NULL);
+INSERT INTO `query_statementa` VALUES (33, 1, '2019-05-20 21:33:17', NULL, 'operation4SystemUser', b'0', 'list', '[like, max, offset]', 'from SystemUser systemuser where appendAttribute like :like', '用户维护', 'listSystemUser');
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -17,7 +17,6 @@
     <g:set var="entityName" value="${message(code: 'queryStatementA.label', default: 'QueryStatementA')}"/>
     <title><g:message code="default.edit.label" args="[entityName]"/></title>
 
-    <asset:stylesheet src="main.css"/>
 </head>
 
 <body>
