@@ -103,6 +103,9 @@
                     <a class="page-link" id="pageSizeHome当前进度"></a>
                 </li>
                 <li class="page-item">
+                    <a class="page-link" href="javascript: loadHomeFirstPage('当前进度')">首页</a>
+                </li>
+                <li class="page-item">
                     <a class="page-link" href="javascript: loadHomePreviousPage('当前进度')">&laquo</a>
                 </li>
                 <li class="page-item">
@@ -116,6 +119,9 @@
                 </li>
                 <li>
                     <a class="page-link" href="javascript: loadHomeNextPage('当前进度')">&raquo</a>
+                </li>
+                <li>
+                    <a class="page-link" href="javascript: loadHomeLastPage('当前进度')">尾页</a>
                 </li>
             </ul>
         </div>
@@ -135,6 +141,9 @@
                     <a class="page-link" id="pageSizeHome登陆情况"></a>
                 </li>
                 <li class="page-item">
+                    <a class="page-link" href="javascript: loadHomeFirstPage('登陆情况')">首页</a>
+                </li>
+                <li class="page-item">
                     <a class="page-link" href="javascript: loadHomePreviousPage('登陆情况')">&laquo</a>
                 </li>
                 <li class="page-item">
@@ -148,6 +157,9 @@
                 </li>
                 <li>
                     <a class="page-link" href="javascript: loadHomeNextPage('登陆情况')">&raquo</a>
+                </li>
+                <li>
+                    <a class="page-link" href="javascript: loadHomeLastPage('登陆情况')">尾页</a>
                 </li>
             </ul>
         </div>

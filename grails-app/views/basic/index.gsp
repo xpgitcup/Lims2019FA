@@ -29,9 +29,9 @@
 <div class="card">
     <div id="controllers" role="navigation">
         <h2>Available Controllers:</h2>
-        <ul>
+        <ul class="nav navbar">
             <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName }}">
-                <li class="controller">
+                <li class="nav-item">
                     <g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link>
                 </li>
             </g:each>

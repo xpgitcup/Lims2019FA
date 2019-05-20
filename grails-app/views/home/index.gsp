@@ -52,6 +52,9 @@
                     <a class="page-link" id="pageSizeHome我的进展"></a>
                 </li>
                 <li class="page-item">
+                    <a class="page-link" href="javascript: loadHomeFirstPage('我的进展')">首页</a>
+                </li>
+                <li class="page-item">
                     <a class="page-link" href="javascript: loadHomePreviousPage('我的进展')">&laquo</a>
                 </li>
                 <li class="page-item">
@@ -65,6 +68,9 @@
                 </li>
                 <li>
                     <a class="page-link" href="javascript: loadHomeNextPage('我的进展')">&raquo</a>
+                </li>
+                <li>
+                    <a class="page-link" href="javascript: loadHomeLastPage('我的进展')">尾页</a>
                 </li>
             </ul>
         </div>
@@ -84,6 +90,9 @@
                     <a class="page-link" id="pageSizeHome我的登录"></a>
                 </li>
                 <li class="page-item">
+                    <a class="page-link" href="javascript: loadHomeFirstPage('我的登录')">首页</a>
+                </li>
+                <li class="page-item">
                     <a class="page-link" href="javascript: loadHomePreviousPage('我的登录')">&laquo</a>
                 </li>
                 <li class="page-item">
@@ -97,6 +106,9 @@
                 </li>
                 <li>
                     <a class="page-link" href="javascript: loadHomeNextPage('我的登录')">&raquo</a>
+                </li>
+                <li>
+                    <a class="page-link" href="javascript: loadHomeLastPage('我的登录')">尾页</a>
                 </li>
             </ul>
         </div>

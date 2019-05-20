@@ -1,45 +1,88 @@
 //全局变量定义
-var treeViewPersonTitleUl;
+var titlePersonTitle = "人员类型维护"
+var echartsPersonTitleDiv;
 
 $(function () {
-
-    console.info("加载..." + document.title);
-
-    //变量获取
-    treeViewPersonTitleUl = $("#treeViewPersonTitleUl");
-
-    treeViewPersonTitleUl.tree({
-        url: "operation4PersonTitle/getTreeViewData",
-        onSelect: function (node) {
-            console.info("树形结构节点选择：" + node.target.id);
-            sessionStorage.setItem("currentNode" + document.title, node.target.id);
-            treeNodeSelectedPersonTitle(node);
+    console.info(document.title + "加载了...")
+    echartsPersonTitleDiv = echarts.init(document.getElementById('echartsPersonTitleDiv'));
+    // 指定图表的配置项和数据
+    var treeData = loadTreeViewDataPersonTitle();
+    var option = {
+        tooltip: {
+            trigger: 'item',
+            triggerOn: 'mousemove'
         },
-        onLoadSuccess: function () {
-            var cnodeid = readStorage("currentNode" + document.title, 0);
-            console.info("上一次：" + cnodeid);
-            treeViewPersonTitleUl.tree("collapseAll");
-            if (cnodeid != 0) {
-                console.info("扩展到：" + cnodeid);
-                var cnode = $("#" + cnodeid);
-                treeViewPersonTitleUl.tree("expandTo", cnode);
-                treeViewPersonTitleUl.tree("select", cnode);
+        legend: {
+            top: '2%',
+            left: '3%',
+            orient: 'vertical',
+            data: [{name: '人员类型维护', icon: 'rectangle'}],
+            borderColor: '#c23531'
+        },
+        series: [
+            {
+                type: 'tree',
+                name: '人员类型维护',
+                data: [treeData],
+                top: '5%',
+                left: '7%',
+                bottom: '2%',
+                right: '60%',
+                symbolSize: 17,
+                label: {
+                    normal: {
+                        position: 'left',
+                        verticalAlign: 'middle',
+                        align: 'right'
+                    }
+                },
+                // 叶子设置
+                leaves: {
+                    label: {
+                        normal: {
+                            position: 'right',
+                            verticalAlign: 'middle',
+                            align: 'left'
+                        }
+                    }
+                },
+
+                expandAndCollapse: true,
+                animationDuration: 550,
+                animationDurationUpdate: 750
             }
+        ]
+    }
+    // 使用刚指定的配置项和数据显示图表。
+    echartsPersonTitleDiv.setOption(option);
+    // 事件处理
+    echartsPersonTitleDiv.on('click', function (params) {
+            //console.info(params.name); 节点的名称
+            var node = params.value // 附加的属性，很有用的
+            //请根据需要替换
+            treeNodeSelectedPersonTitle(node);
         }
-    })
-});
+    )
+})
+
+function loadTreeViewDataPersonTitle() {
+    var url = "operation4PersonTitle/getTreeViewData"
+    var json = ajaxCall(url)
+    return json
+}
 
 /*
 * 节点选择
 * */
 function treeNodeSelectedPersonTitle(node) {
     console.info("选择" + node);
-    $("#createItem").attr('href', 'javascript: createItem(' + node.attributes[0] + ')');
-    $("#createItem").html("创建" + node.attributes[0] + '的子节点');
-    $("#editItem").attr('href', 'javascript: editItem(' + node.attributes[0] + ')');
-    $("#editItem").html("编辑" + node.attributes[0] + '节点');
-    $("#deleteItem").attr('href', 'javascript: deleteItem(' + node.attributes[0] + ')');
-    $("#deleteItem").html("删除" + node.attributes[0] + '节点');
+    var nodeid = node[0]
+    $("#createItem").attr('href', 'javascript: createItem(' + nodeid + ')');
+    $("#createItem").html("创建" + nodeid + '的子节点');
+    $("#editItem").attr('href', 'javascript: editItem(' + nodeid + ')');
+    $("#editItem").html("编辑" + nodeid + '节点');
+    $("#deleteItem").attr('href', 'javascript: deleteItem(' + nodeid + ')');
+    $("#deleteItem").html("删除" + nodeid + '节点');
     $("#currentTitle").html(node.text);
     showPersonTitle(node);
 }
@@ -80,17 +123,9 @@ function editPersonTitle(id) {
 * */
 function showPersonTitle(node) {
     if (node) {
-        var id = node.attributes[0];
+        var id = node[0];
         ajaxRun("operation4PersonTitle/show", id, "showPersonTitleDiv");
     }
-}
-
-/*
-* 节点被选择。。。
-* */
-function changeUpNode(node) {
-    console.info(jsTitle + "+节点选择......" + node);
-    console.info("修改根节点的id...")
 }
 
 /*
