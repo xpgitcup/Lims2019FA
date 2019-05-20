@@ -1,14 +1,32 @@
 //全局变量定义
-var treeViewSystemMenuDiv;
+var title1 = "1"
+var echarts1Div;
 
 $(function(){
-    console.info(document.title + "加载了...");
-    treeViewSystemMenuDiv = $("#treeViewSystemMenuDiv");
-    treeViewSystemMenuDiv.treeview({
-        data: loadTreeViewDataSystemMenu(),
-        collapseIcon: "glyphicon glyphicon-minus"
-    });
-    //treeViewSystemMenuDiv.treeview('collapseAll',{silent: false});
+    console.info(document.title + "加载了...")
+    echarts1Div = echarts.init(document.getElementById('echarts1Div'));
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: 'ECharts 入门示例'
+        },
+        tooltip: {},
+        legend: {
+            data:['销量']
+        },
+        xAxis: {
+            data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+        },
+        yAxis: {},
+        series: [{
+            name: '销量',
+            type: 'bar',
+            data: [5, 20, 36, 10, 10, 20]
+        }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    echarts1Div.setOption(option);
 })
 
 function loadTreeViewDataSystemMenu() {

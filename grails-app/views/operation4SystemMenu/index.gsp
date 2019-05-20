@@ -39,7 +39,10 @@
                     </a>
                 </li>
             </ul>
-            <div id="treeViewSystemMenuDiv"></div>
+
+            <div class="card">
+                <div id="echarts1Div" style="height: 400px" title="1"></div>
+            </div>
         </div>
 
         <div class="col-6">
