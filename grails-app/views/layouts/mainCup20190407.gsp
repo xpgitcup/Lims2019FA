@@ -87,7 +87,7 @@
         <div class="col-lg-1 m-0 p-0">
             <ul class="list-unstyled text-right">
                 <g:if test="${session.systemUser}">
-                    <li class="list-group-item m-0 p-0">
+                    <li class="list-group-item m-0 p-0 small">
                         当前：${session.userName}/${session.userTitle}
                     </li>
                     <li class="list-group-item m-0 p-0">
