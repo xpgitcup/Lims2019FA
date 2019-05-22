@@ -1,5 +1,4 @@
-//全局变量定义
-var titlePersonTitle = "人员类型维护"
+var titlePersonTitle= "人员类型维护"
 var echartsPersonTitleDiv;
 
 $(function () {
@@ -65,7 +64,8 @@ $(function () {
     )
 })
 
-function loadTreeViewDataPersonTitle() {
+function loadTreeViewDataPersonTitle()
+{
     var url = "operation4PersonTitle/getTreeViewData"
     var json = ajaxCall(url)
     return json

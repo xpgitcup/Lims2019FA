@@ -1,51 +1,119 @@
 package cn.edu.cup.lims
 
+import grails.converters.JSON
 import grails.validation.ValidationException
 import static org.springframework.http.HttpStatus.*
 
-class ThingController {
+class ThingController extends cn.edu.cup.common.CommonController {
 
     ThingService thingService
+    def commonService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
+        def model = [:]
+        def userResult = false
         params.max = Math.min(max ?: 10, 100)
-        respond thingService.list(params), model:[thingCount: thingService.count()]
+        if (params.title) {
+            model.thingTitle = params.title
+            userResult = true
+        }
+        if (params.jsRoutine) {
+            model.thingJsRoutine = params.jsRoutine
+            userResult = true
+        }
+
+        if (userResult) {
+            model
+        } else {
+            respond thingService.list(params), model:[thingCount: thingService.count()]
+        }
     }
 
     def show(Long id) {
-        respond thingService.get(id)
+        def view = "show"
+        if (params.view) {
+            view = params.view
+        }
+
+        def thing = thingService.get(id)
+
+        if (request.xhr) {
+            render(template: view, model: [thing: thing])
+        } else {
+            respond thing
+        }
     }
 
     def create() {
-        respond new Thing(params)
+        def view = "create"
+        if (params.view) {
+            view = params.view
+        }
+
+        def thing = new Thing(params)
+
+        if (request.xhr) {
+            render(template: view, model: [thing: thing])
+        } else {
+            respond thing
+        }
     }
 
     def save(Thing thing) {
+
         if (thing == null) {
             notFound()
             return
         }
 
-        try {
-            thingService.save(thing)
-        } catch (ValidationException e) {
-            respond thing.errors, view:'create'
-            return
+        def action = "index"
+        if (params.nextAction) {
+            action = params.nextAction
         }
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'thing.label', default: 'Thing'), thing.id])
-                redirect thing
-            }
-            '*' { respond thing, [status: CREATED] }
+        def controller = params.controller
+        if (params.nextController) {
+            controller = params.nextController
         }
+
+        try {
+            thingService.save(thing)
+            flash.message = message(code: 'default.created.message', args: [message(code: 'thing.label', default: 'Thing'), thing.id])
+        } catch (ValidationException e) {
+            flash.message = thing.errors
+        }
+
+        withFormat {
+            js { render "alert('thing创建成功!')" }
+
+            json { render thing as JSON }
+
+            '*' {
+                if (params.url) {
+                    redirect(params.url)
+                } else {
+                    redirect(controller: controller, action: action, params: params)
+                }
+            }
+        }
+
     }
 
     def edit(Long id) {
-        respond thingService.get(id)
+        def view = "edit"
+        if (params.view) {
+            view = params.view
+        }
+
+        def thing = thingService.get(id)
+
+        if (request.xhr) {
+            render(template: view, model: [thing: thing])
+        } else {
+            respond thing
+        }
     }
 
     def update(Thing thing) {
@@ -54,19 +122,28 @@ class ThingController {
             return
         }
 
-        try {
-            thingService.save(thing)
-        } catch (ValidationException e) {
-            respond thing.errors, view:'edit'
-            return
+        def action = "index"
+        if (params.nextAction) {
+            action = params.nextAction
         }
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'thing.label', default: 'Thing'), thing.id])
-                redirect thing
-            }
-            '*'{ respond thing, [status: OK] }
+        def controller = ""
+        if (params.nextController) {
+            controller = params.nextController
+        }
+
+        try {
+            thingService.save(thing)
+            flash.message = message(code: 'default.updated.message', args: [message(code: 'thing.label', default: 'Thing'), thing.id])
+        } catch (ValidationException e) {
+            flash.message = thing.errors
+        }
+
+        if (controller == "")
+        {
+            redirect(action: action)
+        } else {
+            redirect(controller: controller, action: action)
         }
     }
 
@@ -77,13 +154,81 @@ class ThingController {
         }
 
         thingService.delete(id)
+        flash.message = message(code: 'default.deleted.message', args: [message(code: 'thing.label', default: 'Thing'), id])
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'thing.label', default: 'Thing'), id])
-                redirect action:"index", method:"GET"
+        def action = "index"
+        if (params.nextAction) {
+            action = params.nextAction
+        }
+
+        def controller = ""
+        if (params.nextController) {
+            controller = params.nextController
+        }
+
+        if (controller == "")
+        {
+            redirect(action: action)
+        } else {
+            redirect(controller: controller, action: action)
+        }
+    }
+
+    def importFromJsonFile() {
+
+        def fileName = "${commonService.webRootPath}/${params.fileName}"
+        def objectList = commonService.importObjectArrayFromJsonFileName(fileName, Thing.class)
+        if (objectList.size()>0) {
+            // 先清空
+            Thing.list().each { e ->
+                thingService.delete(e.id)
             }
-            '*'{ render status: NO_CONTENT }
+            objectList.each { e ->
+                thingService.save(e)
+            }
+        }
+
+        def action = "index"
+        if (params.nextAction) {
+           action = params.nextAction
+         }
+
+        def controller = ""
+        if (params.nextController) {
+            controller = params.nextController
+        }
+
+        if (controller == "") {
+            redirect(action: action)
+        } else {
+            redirect(controller: controller, action: action)
+        }
+    }
+
+    def exportToJsonFile() {
+
+        def fileName = "${commonService.webRootPath}/${params.fileName}"
+
+       def fjson = commonService.exportObjects2JsonString(Thing.list())
+        def printer = new File(fileName).newPrintWriter('utf-8')    //写入文件
+        printer.println(fjson)
+        printer.close()
+
+        def action = "index"
+        if (params.nextAction) {
+            action = params.nextAction
+        }
+
+        def controller = ""
+        if (params.nextController) {
+            controller = params.nextController
+        }
+
+        if (controller == "")
+        {
+            redirect(action: action)
+        } else {
+            redirect(controller: controller, action: action)
         }
     }
 

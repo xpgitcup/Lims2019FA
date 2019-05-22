@@ -1,45 +1,92 @@
-//全局变量定义
-var treeViewThingTypeUl;
+var titleThingType= "项目类型维护"
+var echartsThingTypeDiv;
 
 $(function () {
-
-    console.info("加载..." + document.title);
-
-    //变量获取
-    treeViewThingTypeUl = $("#treeViewThingTypeUl");
-
-    treeViewThingTypeUl.tree({
-        url: "operation4ThingType/getTreeViewData",
-        onSelect: function (node) {
-            console.info("树形结构节点选择：" + node.target.id);
-            sessionStorage.setItem("currentNode" + document.title, node.target.id);
-            treeNodeSelectedThingType(node);
+    console.info(document.title + "加载了...")
+    echartsThingTypeDiv = echarts.init(document.getElementById('echartsThingTypeDiv'));
+    // 指定图表的配置项和数据
+    var treeData = loadTreeViewDataThingType();
+    var option = {
+        tooltip: {
+            trigger: 'item',
+            triggerOn: 'mousemove'
         },
-        onLoadSuccess: function () {
-            var cnodeid = readStorage("currentNode" + document.title, 0);
-            console.info("上一次：" + cnodeid);
-            treeViewThingTypeUl.tree("collapseAll");
-            if (cnodeid != 0) {
-                console.info("扩展到：" + cnodeid);
-                var cnode = $("#" + cnodeid);
-                treeViewThingTypeUl.tree("expandTo", cnode);
-                treeViewThingTypeUl.tree("select", cnode);
+        legend: {
+            top: '2%',
+            left: '3%',
+            orient: 'vertical',
+            data: [{name: '项目类型维护', icon: 'rectangle'}],
+            borderColor: '#c23531'
+        },
+        series: [
+            {
+                type: 'tree',
+                name: '项目类型维护',
+                data: [treeData],
+                top: '5%',
+                left: '7%',
+                bottom: '2%',
+                right: '60%',
+                symbolSize: 17,
+                label: {
+                    normal: {
+                        position: 'left',
+                        verticalAlign: 'middle',
+                        align: 'right'
+                    }
+                },
+                // 叶子设置
+                leaves: {
+                    label: {
+                        normal: {
+                            position: 'right',
+                            verticalAlign: 'middle',
+                            align: 'left'
+                        }
+                    }
+                },
+
+                expandAndCollapse: true,
+                animationDuration: 550,
+                animationDurationUpdate: 750
             }
+        ]
+    }
+    // 使用刚指定的配置项和数据显示图表。
+    echartsThingTypeDiv.setOption(option);
+    // 事件处理
+    echartsThingTypeDiv.on('click', function (params) {
+            //console.info(params.name); 节点的名称
+            var node = {
+                name: params.name,
+                id: params.value[0]
+            } // 附加的属性，很有用的
+            //请根据需要替换
+            treeNodeSelectedThingType(node);
         }
-    })
-});
+    )
+})
+
+function loadTreeViewDataThingType()
+{
+    var url = "operation4ThingType/getTreeViewData"
+    var json = ajaxCall(url)
+    return json
+}
 
 /*
 * 节点选择
 * */
-function treeNodeSelectedThingType(node) {
+function treeNodeSelectedThingType(nodeData) {
+    var node = nodeData.id
+    var name = nodeData.name
     console.info("选择" + node);
-    $("#createItem").attr('href', 'javascript: createItem(' + node.attributes[0] + ')');
-    $("#createItem").html("创建" + node.attributes[0] + '的子节点');
-    $("#editItem").attr('href', 'javascript: editItem(' + node.attributes[0] + ')');
-    $("#editItem").html("编辑" + node.attributes[0] + '节点');
-    $("#currentTitle").html(node.text);
-    showThingType(node);
+    $("#createItem").attr('href', 'javascript: createItem(' + node + ')');
+    $("#createItem").html("创建" + node + '的子节点');
+    $("#editItem").attr('href', 'javascript: editItem(' + node + ')');
+    $("#editItem").html("编辑" + node + '节点');
+    $("#currentTitle").html(name);
+    showThingType(nodeData);
 }
 
 function deleteItem(id) {
@@ -77,7 +124,7 @@ function createCourse(id) {
 * */
 function showThingType(node) {
     if (node) {
-        var id = node.attributes[0];
+        var id = node.id;
         ajaxRun("operation4ThingType/show", id, "showThingTypeDiv");
     }
 }

@@ -1,77 +1,99 @@
 //全局变量定义
-var treeViewThingTypeUl;
-//全局变量定义
-var listPlanDiv;
-var localPageSizePlan;
-var paginationPlanDiv;
+var titleThingType = "通用计划"
+var echartsThingTypeDiv;
+var titlePlan = "通用计划"
 
 $(function () {
-
-    console.info("加载..." + document.title);
-
-    //变量获取
-    treeViewThingTypeUl = $("#treeViewThingTypeUl");
-
-    treeViewThingTypeUl.tree({
-        url: "operation4ThingType/getTreeViewData",
-        onSelect: function (node) {
-            console.info("树形结构节点选择：" + node.target.id);
-            sessionStorage.setItem("currentNode" + document.title, node.target.id);
-            treeNodeSelectedThingType(node);
+    console.info(document.title + "加载了...")
+    echartsThingTypeDiv = echarts.init(document.getElementById('echartsThingTypeDiv'));
+    // 指定图表的配置项和数据
+    var treeData = loadTreeViewDataThingType();
+    var option = {
+        tooltip: {
+            trigger: 'item',
+            triggerOn: 'mousemove',
+            formatter: "{b}: {c}"
         },
-        onLoadSuccess: function () {
-            var cnodeid = readStorage("currentNode" + document.title, 0);
-            console.info("上一次：" + cnodeid);
-            treeViewThingTypeUl.tree("collapseAll");
-            if (cnodeid != 0) {
-                console.info("扩展到：" + cnodeid);
-                var cnode = $("#" + cnodeid);
-                treeViewThingTypeUl.tree("expandTo", cnode);
-                treeViewThingTypeUl.tree("select", cnode);
+        legend: {
+            top: '2%',
+            left: '3%',
+            orient: 'vertical',
+            data: [{name: '通用计划', icon: 'rectangle'}],
+            borderColor: '#c23531'
+        },
+        series: [
+            {
+                type: 'tree',
+                name: '通用计划',
+                data: [treeData],
+                top: '5%',
+                left: '7%',
+                bottom: '2%',
+                right: '60%',
+                symbolSize: 17,
+                label: {
+                    normal: {
+                        position: 'left',
+                        verticalAlign: 'middle',
+                        align: 'right'
+                    }
+                },
+                // 叶子设置
+                leaves: {
+                    label: {
+                        normal: {
+                            position: 'right',
+                            verticalAlign: 'middle',
+                            align: 'left'
+                        }
+                    }
+                },
+
+                expandAndCollapse: true,
+                animationDuration: 550,
+                animationDurationUpdate: 750
             }
+        ]
+    }
+    // 使用刚指定的配置项和数据显示图表。
+    echartsThingTypeDiv.setOption(option);
+    // 事件处理
+    echartsThingTypeDiv.on('click', function (params) {
+            //console.info(params.name); 节点的名称
+            var node = {
+                name: params.name,
+                id: params.value[0]
+            } // 附加的属性，很有用的
+            //请根据需要替换
+            treeNodeSelectedThingType(node);
         }
-    })
+    )
 
-    //变量获取
-    listPlanDiv = $("#listPlanDiv");
-    var localPageSizePlan = readLocalStorage("pageSize" + document.title, 10);
-    var cPageNumber = readStorage("currentPage" + document.title, 1);
-    var total = countPlan(document.title)
+    setupPaginationPlan();
+    loadPlanCurrentPage();
 
-    listPlanDiv.panel({
-        href: loadPlan(document.title, cPageNumber, localPageSizePlan)
-    });
+})
 
-    /*
-    * 设置分页参数
-    * */
-    paginationPlanDiv = $("#paginationPlanDiv")
-    paginationPlanDiv.pagination({
-        pageSize: localPageSizePlan,
-        total: total,
-        pageList: [1, 3, 5, 10, 20, 30],
-        showPageList: false,
-        pageNumber: cPageNumber,
-        onSelectPage: function (pageNumber, pageSize) {
-            sessionStorage.setItem("currentPage" + document.title, pageNumber);     //记录当前页面
-            loadPlan(document.title, pageNumber, pageSize);
-        }
-    })
-
-});
+function loadTreeViewDataThingType() {
+    var url = "operation4ThingType/getTreeViewData"
+    var json = ajaxCall(url)
+    return json
+}
 
 /*
 * 节点选择
 * */
-function treeNodeSelectedThingType(node) {
+function treeNodeSelectedThingType(data) {
+    var node = data.id
+    var name = data.name
     console.info("选择" + node);
-    $("#createItem").attr('href', 'javascript: createItemAuto(' + node.attributes[0] + ')');
-    $("#createItem").html("自动创建" + node.attributes[0] + '的计划');
-    $("#editItem").attr('href', 'javascript: editItem(' + node.attributes[0] + ')');
-    $("#editItem").html("编辑" + node.attributes[0] + '计划');
-    $("#currentTitle").html(node.text);
+    $("#createItem").attr('href', 'javascript: createItemAuto(' + node + ')');
+    $("#createItem").html("自动创建" + node + '的计划');
+    $("#editItem").attr('href', 'javascript: editItem(' + node + ')');
+    $("#editItem").html("编辑" + node + '计划');
+    $("#currentTitle").html(name);
 
-    sessionStorage.setItem("currentThingTypeId" + document.title, node.attributes[0]);
+    sessionStorage.setItem("currentThingTypeId" + document.title, node);
 
     var localPageSizePlan = readLocalStorage("pageSize" + document.title, 10);
     var cPageNumber = readStorage("currentPage" + document.title, 1);
@@ -144,4 +166,148 @@ function createPlanItem(id) {
     console.info("创建计划...");
     ajaxRun("operation4Plan/create?thingTypeId=" + id + "&view=createTypePlan",
         0, "operation4PlanDiv");
+}
+
+
+/*
+* 初始化分页参数
+* */
+function setupPaginationPlan () {
+    console.info("处理：" + titlePlan + "!");
+    // 当前页
+    var currentPageName = "currentPagePlan" + titlePlan;
+    var currentPage = 1;
+    if (localStorage.hasOwnProperty(currentPageName)) {
+        currentPage = parseInt(localStorage.getItem(currentPageName));
+    }
+    $("#" + currentPageName).html(currentPage);
+    // 页长度
+    var pageSizeName = "pageSizePlan" + titlePlan;
+    var pageSize = 10;
+    if (localStorage.hasOwnProperty(pageSizeName)) {
+        pageSize = parseInt(localStorage.getItem(pageSizeName))
+    } else {
+        localStorage.setItem(pageSizeName, pageSize);
+    }
+    $("#" + pageSizeName).html(pageSize);
+    // 总页数
+    var total = countDataPlan();
+    var totalPageName = "totalPagePlan" + titlePlan;
+    var totalPage =  Math.ceil(total/pageSize)
+    $("#" + totalPageName).html(totalPage)
+}
+
+/*
+* 同时存储到两个地方
+* */
+function showCurrentPageNumber(currentPageNumber) {
+    var currentPageName = "currentPagePlan" + titlePlan
+    $("#" + currentPageName).html(currentPageNumber);
+    localStorage.setItem(currentPageName, currentPageNumber);
+}
+
+/*
+* 获取当前页---从localStorage中获取
+* */
+function getCurrentPage() {
+    var currentPageName ="currentPagePlan" + titlePlan;
+    var currentPageNumber
+    if (localStorage.hasOwnProperty(currentPageName)) {
+        currentPageNumber = parseInt(localStorage.getItem(currentPageName))
+    } else {
+        currentPageNumber = 1
+        localStorage.setItem(currentPageName, currentPageNumber)
+    }
+    return currentPageNumber
+}
+
+/*
+* 获取页码上限
+* */
+function getTotalPage() {
+    var totalPageName = "totalPagePlan" + titlePlan;
+    var totalPage = parseInt($("#" + totalPageName).html());
+    return totalPage;
+}
+
+/*
+* 获取页面长度
+* */
+function getPageSize() {
+    var pageSizeName = "pageSizePlan" + titlePlan;
+    var pageSize = parseInt(localStorage.getItem(pageSizeName))
+    return pageSize
+}
+
+/*
+* 加载末页数据
+* */
+function loadPlanLastPage() {
+    var totalPageName = "totalPagePlan" + titlePlan;
+    var currentPage = parseInt($("#" + totalPageName).html())
+    showCurrentPageNumber(currentPage);
+    loadDataPlan(currentPage);
+}
+
+/*
+* 加载首页数据
+* */
+function loadPlanFirstPage() {
+    var currentPage = 1
+    showCurrentPageNumber(currentPage);
+    loadDataPlan(currentPage);
+}
+
+/*
+* 加载当前页数据
+* */
+function loadPlanCurrentPage() {
+    var currentPage = getCurrentPage()
+    loadDataPlan(currentPage);
+}
+
+/*
+* 向前翻页
+* */
+function loadPlanPreviousPage() {
+    var currentPage = getCurrentPage()
+    currentPage = currentPage - 1;
+    if (currentPage < 1) {
+        currentPage = 1;
+    }
+    showCurrentPageNumber(currentPage);
+    loadDataPlan(currentPage);
+}
+
+/*
+* 向后翻页
+* */
+function loadPlanNextPage() {
+    var currentPage = getCurrentPage()
+    var totalPage = getTotalPage()
+    currentPage = currentPage + 1;
+    if (currentPage > totalPage) {
+        currentPage = totalPage;
+    }
+    showCurrentPageNumber(currentPage);
+    loadDataPlan(currentPage);
+}
+
+function loadDataPlan(currentPage) {
+    var pageSize = getPageSize()
+    var pageParams = getParams(currentPage, pageSize)
+    var append = appendParams()
+    var url = "operation4Plan/list" + pageParams + "&key=" + titlePlan + append;
+    ajaxRun(url, 0, "display" + titlePlan + "Div");
+}
+
+function countDataPlan() {
+    var append = appendParams()
+    var url = "operation4Plan/count?key=" + titlePlan + append;
+    var total = ajaxCalculate(url);
+    return total;
+}
+
+function appendParams() {
+    return "";
 }
