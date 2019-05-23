@@ -42,7 +42,7 @@
             </ul>
 
             <div class="card">
-                <div id="echartsPersonTitleDiv" style="height: 400px" title="人员类型维护"></div>
+                <ul id="ztreePersonTitleUl" class="ztree" title="人员类型维护"></ul>
             </div>
         </div>
 

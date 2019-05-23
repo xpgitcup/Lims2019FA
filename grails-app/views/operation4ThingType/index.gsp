@@ -31,13 +31,6 @@
 <body>
 
 <div class="container-fluid">
-    <div class="nav">
-        <div class="easyui-panel" style="width: 100%">
-        </div>
-    </div>
-</div>
-
-<div class="container-fluid">
     <div class="row">
         <div class="col-6">
             <ul id="operation4ThingTypeUl" class="nav navbar bg-light">
@@ -52,7 +45,7 @@
             </ul>
 
             <div class="card">
-                <div id="echartsThingTypeDiv" style="height: 400px" title="项目类型维护"></div>
+                <ul id="ztreeThingTypeUl" class="ztree" title="项目类型"></ul>
             </div>
         </div>
 

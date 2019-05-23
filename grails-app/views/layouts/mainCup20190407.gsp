@@ -34,13 +34,20 @@
 
     <asset:stylesheet src="main.css"/>
 
+    <!--zTree -->
+    <asset:stylesheet src="ztree/zTreeStyle/zTreeStyle.css"/>
+
     <!--JS加载-->
     <asset:javascript src="jquery-3.3.1.min.js"/>
 
     <asset:javascript src="popper.min.js"/>
     <asset:javascript src="bootstrap.js"/>
 
-    <asset:javascript src="bootstrap-treeview/bootstrap-treeview.min.js"/>
+    <!--这个工作不正常-->
+    <!--asset:javascript src="bootstrap-treeview/bootstrap-treeview.min.js"/-->
+
+    <!--zTree -->
+    <asset:javascript src="ztree/jquery.ztree.all.min.js"/>
 
     <!-- 加载石油大学的设置-->
     <asset:javascript src="cn/edu/cup/common.js"/>

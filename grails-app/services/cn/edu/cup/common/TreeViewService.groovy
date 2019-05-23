@@ -56,6 +56,7 @@ class TreeViewService extends GenericService {
                     emap.put("text", tempText)  //
                     break
                 case JsFrame.BaiduECharts:
+                case JsFrame.zTree:
                     emap.put("name", tempText)  //
                     break
             }
@@ -76,6 +77,9 @@ class TreeViewService extends GenericService {
                     case JsFrame.BaiduECharts:
                         emap.put("value", attrs)
                         break
+                    case JsFrame.zTree: // zTree
+                        emap.put("value", attrs)
+                        break
                 }
             }
             //处理下一级
@@ -87,6 +91,7 @@ class TreeViewService extends GenericService {
                 switch (jsFrame) {
                     case JsFrame.EasyUI:
                     case JsFrame.BaiduECharts:
+                    case JsFrame.zTree:
                         emap.put("children", childrenmap) //对于EasyUI使用children
                         break
                     case JsFrame.BootStrap:

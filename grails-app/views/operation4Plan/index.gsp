@@ -45,7 +45,7 @@
         <!--左面显示类型-->
         <div class="col-md-4">
             <div class="card">
-                <div id="echartsThingTypeDiv" style="height: 400px" title="通用计划"></div>
+                <ul id="ztreeThingTypeUl" class="ztree" title="项目类型"></ul>
             </div>
         </div>
         <!--右边显示计划-->
@@ -90,6 +90,7 @@
                     </ul>
                 </div>
                 <!--具体的通用计划标签结束======-->
+                <div class="card" id="operation4PlanItemDiv"></div>
             </div>
         </div>
     </div>

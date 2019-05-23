@@ -18,11 +18,15 @@ class Operation4PersonTitleController extends PersonTitleController {
         params.context = "name"
         params.subItems = "subTitles"
         params.attributes = "id"    //
-        def treeData = treeViewService.generateNodesString(data, params, JsFrame.BaiduECharts)
+        def treeData = treeViewService.generateNodesString(data, params, JsFrame.zTree)
+        /*
         // echarts-的树要作如下处理
         def result = [:]
         result.put("name", "人员类型")
         result.put("children", treeData)
+
+         */
+        def result = treeData
         if (request.xhr) {
             render result as JSON
         } else {

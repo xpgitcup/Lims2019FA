@@ -63,11 +63,15 @@ class Operation4ThingTypeController extends ThingTypeController {
         params.context = "name"
         params.subItems = "subTypes"
         params.attributes = "id"    //
-        def treeData = treeViewService.generateNodesString(data, params, JsFrame.BaiduECharts)
+        def treeData = treeViewService.generateNodesString(data, params, JsFrame.zTree)
+        /*
         // echarts-的树要作如下处理
         def result = [:]
         result.put("name", "项目类型")
         result.put("children", treeData)
+
+         */
+        def result = treeData
         if (request.xhr) {
             render result as JSON
         } else {
