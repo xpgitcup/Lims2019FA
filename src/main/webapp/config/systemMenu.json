@@ -18,12 +18,6 @@
         "menuOrder": 10
       },
       {
-        "menuContext": "菜单维护",
-        "menuAction": "Operation4SystemMenu/index",
-        "menuDescription": "对系统的菜单用户进行用户友好的维护",
-        "menuOrder": 20
-      },
-      {
         "menuContext": "查询维护A",
         "menuAction": "operation4QueryStatementA/index",
         "menuDescription": "对系统底层的查询语句进行维护",
@@ -93,6 +87,12 @@
     "menuDescription": "教师可见，从团队开始，用户在此完成全部操作",
     "menuOrder": 0,
     "menuItems": [
+      {
+        "menuContext": "动态菜单",
+        "menuAction": "userDefinedFunction/index",
+        "menuDescription": "动态的菜单",
+        "menuOrder": 0
+      },
       {
         "menuContext": "科研任务",
         "menuAction": "Operation4TeamTeacherProject/index",

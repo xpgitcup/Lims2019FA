@@ -11,7 +11,7 @@
  Target Server Version : 50725
  File Encoding         : 65001
 
- Date: 24/05/2019 10:12:25
+ Date: 24/05/2019 15:39:29
 */
 
 SET NAMES utf8mb4;
@@ -34,7 +34,7 @@ CREATE TABLE `query_statementa`  (
   `key_string` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `view_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 60 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 64 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of query_statementa
@@ -78,5 +78,9 @@ INSERT INTO `query_statementa` VALUES (56, 1, '2019-05-24 10:05:21', NULL, 'oper
 INSERT INTO `query_statementa` VALUES (57, 1, '2019-05-24 10:05:21', NULL, 'operation4ThingTypeCircle', b'0', 'count', '[]', 'select count(*) from ThingTypeCircle thingTypeCircle', '人员类型', NULL);
 INSERT INTO `query_statementa` VALUES (58, 1, '2019-05-24 10:05:21', NULL, 'operation4ThingTypeCircle', b'0', 'list', '[max, offset]', 'from ThingTypeCircle thingTypeCircle order by thingType', '任务类型', 'listThingTypeCircle');
 INSERT INTO `query_statementa` VALUES (59, 2, '2019-05-24 10:05:23', NULL, 'operation4ThingTypeCircle', b'0', 'list', '[max, offset]', 'from ThingTypeCircle thingTypeCircle order by personTitle', '人员类型', 'listThingTypeCirclePersonTitle');
+INSERT INTO `query_statementa` VALUES (60, 0, '2019-05-24 14:08:57', NULL, 'home', b'0', 'count', '[]', NULL, '我的进展', NULL);
+INSERT INTO `query_statementa` VALUES (61, 0, '2019-05-24 14:08:57', NULL, 'home', b'0', 'count', '[]', NULL, '我的登录', NULL);
+INSERT INTO `query_statementa` VALUES (62, 0, '2019-05-24 14:08:57', NULL, 'home', b'0', 'list', '[max, offset]', NULL, '我的进展', NULL);
+INSERT INTO `query_statementa` VALUES (63, 0, '2019-05-24 14:10:55', NULL, 'home', b'0', 'list', '[max, offset]', NULL, '我的登录', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;

@@ -102,6 +102,7 @@ class InitService {
         // 处理菜单的设置
         def systemMenuFileName = "${webRootDir}/config/systemMenu.json"
         if (systemMenuService.count() < 1) {
+            println("处理菜单...")
             importObjects(systemMenuFileName, SystemMenu.class, "selfCheck")
         }
 

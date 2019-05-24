@@ -31,7 +31,7 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-4">
+        <div class="col-3">
             <ul class="nav navbar bg-light">
                 <li>
                     <a class="list">
@@ -46,7 +46,7 @@
             </div>
         </div>
 
-        <div class="col-8">
+        <div class="col-9">
             <ul class="nav navbar bg-light">
                 <li><a class="create" href="javascript: createSystemMenu(0)">新建根节点</a></li>
                 <li><a id="createSystemMenu" class="create" href="#">新建子节点</a></li>
