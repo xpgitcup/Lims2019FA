@@ -31,7 +31,7 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-6">
+        <div class="col-4">
             <ul class="nav navbar bg-light">
                 <li>
                     <a class="list">
@@ -41,11 +41,12 @@
             </ul>
 
             <div class="card">
-                <div id="echartsSystemMenuDiv" style="height: 400px" title="菜单维护"></div>
+                <!--div id="echartsSystemMenuDiv" style="height: 400px" title="菜单维护"></div-->
+                <ul id="ztreeSystemMenuUl" class="ztree" title="菜单维护"></ul>
             </div>
         </div>
 
-        <div class="col-6">
+        <div class="col-8">
             <ul class="nav navbar bg-light">
                 <li><a class="create" href="javascript: createSystemMenu(0)">新建根节点</a></li>
                 <li><a id="createSystemMenu" class="create" href="#">新建子节点</a></li>
