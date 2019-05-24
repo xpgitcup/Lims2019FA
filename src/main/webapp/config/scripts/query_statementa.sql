@@ -3,15 +3,15 @@
 
  Source Server         : sample
  Source Server Type    : MySQL
- Source Server Version : 80015
+ Source Server Version : 50725
  Source Host           : localhost:3306
  Source Schema         : lims2019dba
 
  Target Server Type    : MySQL
- Target Server Version : 80015
+ Target Server Version : 50725
  File Encoding         : 65001
 
- Date: 23/05/2019 23:18:15
+ Date: 24/05/2019 10:12:25
 */
 
 SET NAMES utf8mb4;
@@ -25,16 +25,16 @@ CREATE TABLE `query_statementa`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `version` bigint(20) NOT NULL,
   `update_time` datetime(0) NOT NULL,
-  `format_string` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `format_string` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `controller_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `issql` bit(1) NOT NULL,
   `action_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `params_string` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
-  `query_string` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `params_string` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `query_string` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `key_string` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `view_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+  `view_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 54 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 60 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of query_statementa
@@ -74,5 +74,9 @@ INSERT INTO `query_statementa` VALUES (48, 1, '2019-05-23 21:42:44', NULL, 'oper
 INSERT INTO `query_statementa` VALUES (53, 2, '2019-05-23 22:18:59', NULL, 'operation4Thing', b'0', 'list', '[max, offset]', 'from Course course order by name', '教学', 'listCourse');
 INSERT INTO `query_statementa` VALUES (54, 1, '2019-05-23 23:08:00', NULL, 'operation4Plan', b'0', 'count', '[thingType]', 'select count(*) from Plan plan where plan.thingType.id=cast(:thingType as integer) and plan.upPlan is null', '通用计划', NULL);
 INSERT INTO `query_statementa` VALUES (55, 1, '2019-05-23 23:08:00', NULL, 'operation4Plan', b'0', 'list', '[max, offset, thingType]', 'from Plan plan where plan.thingType.id=cast(:thingType as integer) and plan.upPlan is null order by updateDate desc', '通用计划', 'listPlan');
+INSERT INTO `query_statementa` VALUES (56, 1, '2019-05-24 10:05:21', NULL, 'operation4ThingTypeCircle', b'0', 'count', '[]', 'select count(*) from ThingTypeCircle thingTypeCircle', '任务类型', NULL);
+INSERT INTO `query_statementa` VALUES (57, 1, '2019-05-24 10:05:21', NULL, 'operation4ThingTypeCircle', b'0', 'count', '[]', 'select count(*) from ThingTypeCircle thingTypeCircle', '人员类型', NULL);
+INSERT INTO `query_statementa` VALUES (58, 1, '2019-05-24 10:05:21', NULL, 'operation4ThingTypeCircle', b'0', 'list', '[max, offset]', 'from ThingTypeCircle thingTypeCircle order by thingType', '任务类型', 'listThingTypeCircle');
+INSERT INTO `query_statementa` VALUES (59, 2, '2019-05-24 10:05:23', NULL, 'operation4ThingTypeCircle', b'0', 'list', '[max, offset]', 'from ThingTypeCircle thingTypeCircle order by personTitle', '人员类型', 'listThingTypeCirclePersonTitle');
 
 SET FOREIGN_KEY_CHECKS = 1;

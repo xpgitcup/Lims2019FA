@@ -12,8 +12,7 @@
     <g:each in="${objectList}" var="item" status="i">
         <tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
             <td>
-                ${item.controllerName}
-                <a href="operation4QueryStatementA/edit/${item.id}">编辑</a>
+                <a href="operation4QueryStatementA/edit/${item.id}">${item.controllerName}</a>
                 <a href="javascript: deleteItem(${item.id})">删除</a>
             </td>
             <td>${item.actionName}</td>
