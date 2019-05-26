@@ -5,6 +5,7 @@ function setupPaginationBootStrap(identifier) {
     // 对每个标签进行操作
     var tabs = $("a.nav-link");
     tabs.each(function (e) {
+        // 开头的提示
         var title = tabs[e].text.trim();
         console.info("处理：" + identifier + title + "!");
         // 页长度
@@ -36,14 +37,17 @@ function setupPaginationBootStrap(identifier) {
 
 }
 
-function setupTabsBootStrap(identifier) {
+/*
+* 设置标签页的--事件处理
+* */
+function setupTabsBootStrap(identifier, loadDataFunctionName, countDataFunctionName) {
     var currentTabName = "currentTab" + identifier;
-    // 每个标签绑定数据加载函数
+    // 每个标签绑定数据加载函数---
     $("a.nav-link").on("click", function (e) {
         var title = $(e.target).text().trim();
         console.info("点击事件..." + title + "!")
         localStorage.setItem(currentTabName, title); //记录缺省标签
-        loadCurrentPage(identifier, title)
+        loadCurrentPageBootStrap(identifier, title)
     })
     // 处理缺省标签
     if (localStorage.hasOwnProperty(currentTabName)) {
@@ -65,18 +69,17 @@ function setupTabsBootStrap(identifier) {
 }
 
 /*
-* 同时存储到两个地方
+* 加载当前页数据
 * */
-function showCurrentPageNumber(identifier, title, currentPageNumber) {
-    var currentPageName = "currentPage" + identifier + title
-    $("#" + currentPageName).html(currentPageNumber);
-    localStorage.setItem(currentPageName, currentPageNumber);
+function loadCurrentPageBootStrap(identifier, title) {
+    var currentPage = getCurrentPageBootStrap(identifier, title)
+    loadDataBootStrap(identifier, title, currentPage);
 }
 
 /*
 * 获取当前页---从localStorage中获取
 * */
-function getCurrentPage(identifier, title) {
+function getCurrentPageBootStrap(identifier, title) {
     var currentPageName = "currentPage" + identifier + title;
     var currentPageNumber
     if (localStorage.hasOwnProperty(currentPageName)) {
@@ -89,9 +92,19 @@ function getCurrentPage(identifier, title) {
 }
 
 /*
+* 同时存储到两个地方
+* */
+function showCurrentPageNumberBootStrap(identifier, title, currentPageNumber) {
+    var currentPageName = "currentPage" + identifier + title
+    $("#" + currentPageName).html(currentPageNumber);
+    localStorage.setItem(currentPageName, currentPageNumber);
+}
+
+
+/*
 * 获取页码上限
 * */
-function getTotalPage(identifier, title) {
+function getTotalPageBootStrap(identifier, title) {
     var totalPageName = "totalPage" + identifier + title;
     var totalPage = parseInt($("#" + totalPageName).html());
     return totalPage;
@@ -100,7 +113,7 @@ function getTotalPage(identifier, title) {
 /*
 * 获取页面长度
 * */
-function getPageSize(identifier, title) {
+function getPageSizeBootStrap(identifier, title) {
     var pageSizeName = "pageSize" + identifier + title;
     var pageSize = parseInt(localStorage.getItem(pageSizeName))
     return pageSize
@@ -109,72 +122,65 @@ function getPageSize(identifier, title) {
 /*
 * 加载尾页数据
 * */
-function loadLastPage(identifier, title) {
+function loadLastPageBootStrap(identifier, title) {
     var currentPage = 1;//getCurrentPage(title)
     var totalPageName = "totalPage" + identifier + title;
     currentPage = parseInt($("#" + totalPageName).html())
-    showCurrentPageNumber(title, currentPage);
-    loadDataHome(title, currentPage);
+    showCurrentPageNumberBootStrap(title, currentPage);
+    loadDataBootStrap(title, currentPage);
 }
 
 /*
 * 加载首页数据
 * */
-function loadFirstPage(identifier, title) {
+function loadFirstPageBootStrap(identifier, title) {
     var currentPage = 1;//getCurrentPage(title)
-    showCurrentPageNumber(identifier, title, currentPage);
-    loadDataHome(title, currentPage);
+    showCurrentPageNumberBootStrap(identifier, title, currentPage);
+    loadDataBootStrap(title, currentPage);
 }
 
-/*
-* 加载当前页数据
-* */
-function loadCurrentPage(identifier, title) {
-    var currentPage = getCurrentPage(identifier, title)
-    loadData(identifier, title, currentPage);
-}
 
 /*
 * 向前翻页
 * */
-function loadPreviousPage(identifier, title) {
-    var currentPage = getCurrentPage(identifier, title)
+function loadPreviousPageBootStrap(identifier, title) {
+    var currentPage = getCurrentPageBootStrap(identifier, title)
     currentPage = currentPage - 1;
     if (currentPage < 1) {
         currentPage = 1;
     }
-    showCurrentPageNumber(identifier, title, currentPage);
-    loadData(identifier, title, currentPage);
+    showCurrentPageNumberBootStrap(identifier, title, currentPage);
+    loadDataBootStrap(identifier, title, currentPage);
 }
 
 /*
 * 向后翻页
 * */
-function loadNextPage(identifier, title, currentPage) {
-    var currentPage = getCurrentPage(identifier, title)
-    var totalPage = getTotalPage(identifier, title)
+function loadNextPageBootStrap(identifier, title, currentPage) {
+    var currentPage = getCurrentPageBootStrap(identifier, title)
+    var totalPage = getTotalPageBootStrap(identifier, title)
     currentPage = currentPage + 1;
     if (currentPage > totalPage) {
         currentPage = totalPage;
     }
-    showCurrentPageNumber(identifier, title, currentPage);
-    loadData(identifier, title, currentPage);
+    showCurrentPageNumberBootStrap(identifier, title, currentPage);
+    loadDataBootStrap(identifier, title, currentPage);
 }
 
-function loadData(identifier, title, currentPage) {
-    var pageSize = getPageSize(identifier, title)
+function loadDataBootStrap(identifier, title, currentPage) {
+    var pageSize = getPageSizeBootStrap(identifier, title)
     var pageParams = getParams(currentPage, pageSize)
-    var append = appendParams(title)
+    var append = appendParamsBootStrap(title)
     var url = "home/list" + pageParams + "&key=" + title + append;
     ajaxRun(url, 0, "display" + title + "Div");
 }
 
-function countData(identifier, title) {
+function countDataBootStrap(identifier, title) {
     var url = "home/count?key=" + title;
     var total = ajaxCalculate(url);
     return total;
 }
 
-function appendParams(identifier, title) {
+function appendParamsBootStrap(identifier, title) {
     return "";
 }

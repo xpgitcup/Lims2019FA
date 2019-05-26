@@ -160,6 +160,10 @@ class Operation4TeamController extends TeamController {
     }
 
     def index() {
+        def view = [
+                "科研任务":"index4project",
+                "教学任务":"index4course"
+        ]
         def currentTask
         def currentCase
         if (params.currentTask) {
@@ -172,8 +176,13 @@ class Operation4TeamController extends TeamController {
         } else {
             currentCase = "${currentTask}.学生"
         }
+        println("当前Case:${currentCase}")
         model:
-        [currentTask: currentTask, currentCase: currentCase]
+        [
+                currentTask: currentTask,
+                currentCase: currentCase,
+                currentView: view.get(currentTask)
+        ]
     }
 
 }
