@@ -1,17 +1,15 @@
-var operation4TeamDiv;
-var operation4TeamUl;
-var jsTitleTeam = ["可选题目", "相关团队", "队员列表"];
-var isTreeView4Team = [false];
-var title4Team = jsTitleTeam;
-var tabsTitleLeft = "可选";
-var localPageSizeTeam = 10;
-var tipsOperation4Team;
+$(function(){
+    console.info(document.title + "加载了...")
+    $.setupPaginationBootStrap();
+    setupTabsBootStrap();
+})
 
-var operation4TeamRightDiv;
-var jsTitleTeamRight = ["我领导的", "我参与的"];
-var title4TeamRight = jsTitleTeamRight;
-var tabsTitleRight = "已选";
-var currentCase;
+/*
+* 生成附加参数
+* */
+function appendParamsBootStrap(Team, title) {
+    return "";
+}
 
 var tabsTitleRightCase = {
     "科研任务.教师": ["我领导的", "我参与的"],
@@ -20,61 +18,6 @@ var tabsTitleRightCase = {
     "教学任务.学生": ["我领导的", "我参与的"]
 }
 
-$(function () {
-    currentCase = $("#currentCase").html();
-
-    console.info(currentCase + "---" + jsTitleTeam + "......");
-    console.info(tabsTitleRightCase[currentCase]);
-
-    switch (currentCase.trim()) {
-        case "科研任务.教师":
-        case "科研任务.学生":
-        case  "教学任务.学生":
-            jsTitleTeamRight = ["我领导的", "我参与的"];
-            break;
-        case "教学任务.教师":
-            jsTitleTeamRight = ["我的课程"];
-            title4Team = ["所有课程"];
-            break;
-    }
-
-    tipsOperation4Team = $("#tipsOperation4Team");
-    operation4TeamUl = $("#operation4TeamUl");
-    operation4TeamDiv = $("#operation4TeamDiv");
-
-    var settings = {
-        divId: operation4TeamDiv,
-        titles: title4Team,
-        tabsTitle: tabsTitleLeft,
-        isTreeView: isTreeView4Team,
-        pageSize: localPageSizeTeam,
-        pageList: [1, 3, 5, 10],
-        paginationMessage: "",
-        loadFunction: loadTeam,
-        countFunction: countTeam
-    }
-
-    configDisplayUI(settings);
-
-    setupDisplayUl(operation4TeamUl, jsTitleTeam);
-    reflashDisplayUl(operation4TeamUl, jsTitleTeam);
-
-    operation4TeamRightDiv = $("#operation4TeamRightDiv");
-
-    var settingsRight = {
-        divId: operation4TeamRightDiv,
-        titles: jsTitleTeamRight,
-        tabsTitle: tabsTitleRight,
-        isTreeView: isTreeView4Team,
-        pageSize: localPageSizeTeam,
-        pageList: [1, 3, 5, 10],
-        paginationMessage: "",
-        loadFunction: loadTeam,
-        countFunction: countTeam
-    }
-    configDisplayUI(settingsRight);
-
-});
 
 /*
 * 解散团队

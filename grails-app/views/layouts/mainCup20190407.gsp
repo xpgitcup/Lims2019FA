@@ -39,7 +39,6 @@
 
     <!--JS加载-->
     <asset:javascript src="jquery-3.3.1.min.js"/>
-
     <asset:javascript src="popper.min.js"/>
     <asset:javascript src="bootstrap.js"/>
 
@@ -52,6 +51,7 @@
     <!-- 加载石油大学的设置-->
     <asset:javascript src="cn/edu/cup/common.js"/>
     <asset:javascript src="cn/edu/cup/commonUI20190429.js"/>
+    <asset:javascript src="cn/edu/cup/commonUI4bootstrap20190526.js"/>
     <asset:javascript src="cn/edu/cup/os/homeUI.js"/>
 
     <!--加载百度的绘图 -->
