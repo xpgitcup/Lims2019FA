@@ -40,7 +40,8 @@
             </ul>
 
             <div class="card">
-                <div id="echartsSystemAttributeDiv" style="height: 400px" title="权限维护"></div>
+                <!--div id="echartsSystemAttributeDiv" style="height: 400px" title="权限维护"></div-->
+                <ul id="ztreeSystemAttributeUl" class="ztree" title="权限维护"></ul>
             </div>
         </div>
 

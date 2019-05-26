@@ -121,7 +121,7 @@ class InitService {
         // 处理系统属性
         def attributeFileName = "${webRootDir}/config/systemAttribute.json"
         if (systemAttributeService.count() < 1) {
-            importObjects(attributeFileName, SystemAttribute.class, null)
+            importObjects(attributeFileName, SystemAttribute.class, "selfCheck")
         }
 
         // 处理人员

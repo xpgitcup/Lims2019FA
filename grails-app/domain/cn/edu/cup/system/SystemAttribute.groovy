@@ -1,9 +1,11 @@
 package cn.edu.cup.system
 
+import cn.edu.cup.common.SelfCheck
+
 /*
 * 重新定义属性，以树形结构来维护
 * */
-class SystemAttribute {
+class SystemAttribute implements SelfCheck{
 
     String name
     SystemAttribute upAttribute
@@ -32,4 +34,13 @@ class SystemAttribute {
         return roleList
     }
 
+    @Override
+    void selfCheck() {
+        if (subAttribues) {
+            subAttribues.each { e->
+                e.upAttribute = this
+                e.selfCheck()
+            }
+        }
+    }
 }
