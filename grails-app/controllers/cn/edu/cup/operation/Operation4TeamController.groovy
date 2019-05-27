@@ -170,6 +170,9 @@ class Operation4TeamController extends TeamController {
         def currentCase
         if (params.currentTask) {
             currentTask = params.currentTask
+            session.currentTask = params.currentTask
+        } else {
+            currentTask = session.currentTask
         }
         def p = session.systemUser.personTitle()
         println("当前 ${p}")

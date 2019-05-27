@@ -11,7 +11,7 @@
  Target Server Version : 80015
  File Encoding         : 65001
 
- Date: 27/05/2019 20:41:38
+ Date: 27/05/2019 21:32:53
 */
 
 SET NAMES utf8mb4;
@@ -92,6 +92,6 @@ INSERT INTO `query_statementa` VALUES (49, 1, '2019-05-23 23:08:00', NULL, 'oper
 INSERT INTO `query_statementa` VALUES (50, 3, '2019-05-27 16:11:20', NULL, 'operation4Team', b'0', b'0', 'count', '[]', NULL, '队员列表', NULL);
 INSERT INTO `query_statementa` VALUES (51, 4, '2019-05-27 16:11:22', NULL, 'operation4Team', b'0', b'0', 'list', '[max, offset]', NULL, '队员列表', 'listMember');
 INSERT INTO `query_statementa` VALUES (52, 0, '2019-05-27 20:39:57', NULL, 'operation4Team', b'0', b'1', 'count', '[currentTeam]', NULL, '队员列表', NULL);
-INSERT INTO `query_statementa` VALUES (53, 0, '2019-05-27 20:39:57', NULL, 'operation4Team', b'0', b'1', 'list', '[currentTeam, max, offset]', NULL, '队员列表', NULL);
+INSERT INTO `query_statementa` VALUES (53, 1, '2019-05-27 20:39:57', NULL, 'operation4Team', b'0', b'0', 'list', '[currentTeam, max, offset]', NULL, '队员列表', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
