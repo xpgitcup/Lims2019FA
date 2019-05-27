@@ -6,7 +6,7 @@
     <th>参数</th>
     <th>查询</th>
     <th>视图</th>
-    <th>isSQL</th>
+    <!--th>isSQL</th-->
     </thead>
     <tbody>
     <g:each in="${objectList}" var="item" status="i">
@@ -20,7 +20,7 @@
             <td>${item.paramsString}</td>
             <td>${item.queryString}</td>
             <td>${item.viewName}</td>
-            <td>${item.isSQL}</td>
+            <!--td>${item.isSQL}</td-->
         </tr>
     </g:each>
     </tbody>

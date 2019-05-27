@@ -66,6 +66,12 @@
                     <input type="checkbox" name="isSQL" id="isSQL"/>
                 </div>
 
+                <div class='form-check'>
+                    <label for='needToQuery'>是否需要执行</label><input type="hidden" name="_needToQuery"/>
+                    <input type="checkbox" name="needToQuery" id="needToQuery"
+                           checked="${this.queryStatementA.needToQuery}" value="${this.queryStatementA.needToQuery}"/>
+                </div>
+
                 <g:hiddenField name="nextController" value="${params.nextController}"/>
                 <g:hiddenField name="nextAction" value="${params.nextAction}"/>
             </div>

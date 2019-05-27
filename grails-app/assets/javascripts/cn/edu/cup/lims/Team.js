@@ -1,17 +1,44 @@
-var operation4TeamDiv;
-var operation4TeamUl;
-var jsTitleTeam = ["可选题目", "相关团队", "队员列表"];
-var isTreeView4Team = [false];
-var title4Team = jsTitleTeam;
-var tabsTitleLeft = "可选";
-var localPageSizeTeam = 10;
+bootStrapPaginationSetting.identifier = "Team"
+bootStrapPaginationSetting.controller = "operation4Team"
 var tipsOperation4Team;
 
-var operation4TeamRightDiv;
-var jsTitleTeamRight = ["我领导的", "我参与的"];
-var title4TeamRight = jsTitleTeamRight;
-var tabsTitleRight = "已选";
-var currentCase;
+$(function () {
+    console.info(document.title + "加载了...")
+    setupPaginationBootStrap();
+    setupTabsBootStrap();
+    tipsOperation4Team = $("#tipsOperation4Team");
+})
+
+
+/*
+* 生成附加参数
+* */
+function appendParamsBootStrap(title) {
+    var param = "";
+    var key = "currentKey";
+    var id = 0;
+    tipsOperation4Team = $("#tipsOperation4Team");
+
+    switch (title) {
+        case "可选项目":
+            tipsOperation4Team.html("可以创建团队，也可以查看团队！");
+            break
+        case "相关团队":
+            key += "可选项目";
+            id = readStorage(key, 0);
+            console.info("当前id:" + key + "=" + id);
+            if (id > 0) {
+                param = "&currentThing=" + id;
+                tipsOperation4Team.html("查看当前任务相关团队：" + id);
+            } else {
+                tipsOperation4Team.html("请先选择任务！");
+            }
+            break
+        case "队员列表":
+            break
+    }
+    return param;
+}
 
 var tabsTitleRightCase = {
     "科研任务.教师": ["我领导的", "我参与的"],
@@ -20,62 +47,7 @@ var tabsTitleRightCase = {
     "教学任务.学生": ["我领导的", "我参与的"]
 }
 
-$(function () {
-    currentCase = $("#currentCase").html();
-
-    console.info(currentCase + "---" + jsTitleTeam + "......");
-    console.info(tabsTitleRightCase[currentCase]);
-
-    switch (currentCase.trim()) {
-        case "科研任务.教师":
-        case "科研任务.学生":
-        case  "教学任务.学生":
-            jsTitleTeamRight = ["我领导的", "我参与的"];
-            break;
-        case "教学任务.教师":
-            jsTitleTeamRight = ["我的课程"];
-            title4Team = ["所有课程"];
-            break;
-    }
-
-    tipsOperation4Team = $("#tipsOperation4Team");
-    operation4TeamUl = $("#operation4TeamUl");
-    operation4TeamDiv = $("#operation4TeamDiv");
-
-    var settings = {
-        divId: operation4TeamDiv,
-        titles: title4Team,
-        tabsTitle: tabsTitleLeft,
-        isTreeView: isTreeView4Team,
-        pageSize: localPageSizeTeam,
-        pageList: [1, 3, 5, 10],
-        paginationMessage: "",
-        loadFunction: loadTeam,
-        countFunction: countTeam
-    }
-
-    configDisplayUI(settings);
-
-    setupDisplayUl(operation4TeamUl, jsTitleTeam);
-    reflashDisplayUl(operation4TeamUl, jsTitleTeam);
-
-    operation4TeamRightDiv = $("#operation4TeamRightDiv");
-
-    var settingsRight = {
-        divId: operation4TeamRightDiv,
-        titles: jsTitleTeamRight,
-        tabsTitle: tabsTitleRight,
-        isTreeView: isTreeView4Team,
-        pageSize: localPageSizeTeam,
-        pageList: [1, 3, 5, 10],
-        paginationMessage: "",
-        loadFunction: loadTeam,
-        countFunction: countTeam
-    }
-    configDisplayUI(settingsRight);
-
-});
-
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
 * 解散团队
 * */
@@ -96,38 +68,39 @@ function dismiss(id) {
 
 function quitTeam(id) {
     ajaxExecute("operation4Team/quitTeam/" + id);
-    operation4TeamDiv.tabs("select", "相关队员");
+    selectTabByTitle("select", "相关队员");
     location.reload();
 }
 
 function joinTeam(id) {
     ajaxExecute("operation4Team/joinTeam/" + id)
     selectCurrentItem(id)
-    operation4TeamDiv.tabs("select", "队员列表");
-    operation4TeamRightDiv.tabs("select", "我参与的")
+    selectTabByTitle("队员列表");
+    selectTabByTitle("我参与的")
 }
 
 function createTeam(id) {
     console.info("创建团队...");
     selectCurrentItem(id)
     ajaxExecute("operation4Team/createTeam/" + id)
-    operation4TeamDiv.tabs("select", "相关团队");
+    selectTabByTitle("相关团队");
     location.reload();
 }
 
 function listTeam(id) {
     selectCurrentItem(id)
-    operation4TeamDiv.tabs("select", "相关团队");
+    //selectTabByTitle( "相关团队");
+    selectTabByTitle("相关团队");
 }
 
 function selectCurrentItem(id) {
-    var title = getCurrentTabTitle(operation4TeamDiv)
-    $.cookie("currentKey" + title, id);
+    var title = getCurrentTabTitle()
+    sessionStorage.setItem("currentKey" + title, id);
 }
 
 function listMembers(id) {
     selectCurrentItem(id)
-    operation4TeamDiv.tabs("select", "队员列表");
+    selectTabByTitle("队员列表");
 }
 
 /*
@@ -142,18 +115,8 @@ function shiftDisplay(title) {
         case "我领导的":
             break;
         case "可选题目":
-            tipsOperation4Team.html("可以创建团队，也可以查看团队！");
             break;
         case "相关团队":
-            key += "可选题目";
-            id = readCookie(key, 0);
-            console.info("当前id:" + key + "=" + id);
-            if (id > 0) {
-                param = "&currentThing=" + id;
-                tipsOperation4Team.html("查看当前任务相关团队：" + id);
-            } else {
-                tipsOperation4Team.html("请先选择任务！");
-            }
             break;
         case "队员列表":
             key += "相关团队";

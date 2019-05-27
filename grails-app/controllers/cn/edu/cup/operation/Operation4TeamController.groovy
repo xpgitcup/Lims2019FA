@@ -3,6 +3,7 @@ package cn.edu.cup.operation
 import cn.edu.cup.lims.Team
 import cn.edu.cup.lims.TeamController
 import cn.edu.cup.lims.Thing
+import cn.edu.cup.lims.ThingTypeCircle
 
 class Operation4TeamController extends TeamController {
 
@@ -116,13 +117,13 @@ class Operation4TeamController extends TeamController {
                 params.thingTypeList = thingTypeList
                 params.myself = myself
                 break
-            case "可选题目":
+            case "可选项目":
                 params.thingTypeList = thingTypeList
                 break
             case "相关团队":
                 def currentThing = Thing.get(params.currentThing)
                 params.currentThing = currentThing
-                params.thingTypeList = thingTypeList
+                //params.thingTypeList = thingTypeList
                 break
             case "所有课程":
                 params.thingTypeList = thingTypeList
