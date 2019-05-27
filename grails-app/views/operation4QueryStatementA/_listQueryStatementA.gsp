@@ -7,6 +7,7 @@
     <th>查询</th>
     <th>视图</th>
     <th>执行</th>
+    <th>isSQL</th>
     </thead>
     <tbody>
     <g:each in="${objectList}" var="item" status="i">
@@ -18,9 +19,17 @@
             <td>${item.actionName}</td>
             <td>${item.keyString}</td>
             <td>${item.paramsString}</td>
-            <td>${item.queryString}</td>
+            <td>
+                <g:if test="${item.queryString?.length() > 100}">
+                    ${item.queryString.substring(0, 100)}...
+                </g:if>
+                <g:else>
+                    ${item.queryString}
+                </g:else>
+            </td>
             <td>${item.viewName}</td>
             <td>${item.needToQuery}</td>
+            <td>${item.isSQL}</td>
         </tr>
     </g:each>
     </tbody>

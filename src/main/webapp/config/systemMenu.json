@@ -106,5 +106,31 @@
         "menuOrder": 0
       }
     ]
+  },
+  {
+    "menuContext": "教师服务",
+    "menuAction": "#",
+    "menuDescription": "所有用户统一的",
+    "menuOrder": 0,
+    "menuItems": [
+      {
+        "menuContext": "动态菜单",
+        "menuAction": "userDefinedFunction/index",
+        "menuDescription": "动态的菜单",
+        "menuOrder": 0
+      },
+      {
+        "menuContext": "科研任务",
+        "menuAction": "Operation4TeamTeacher/index?currentTask=科研任务",
+        "menuDescription": "各种项目的基础数据",
+        "menuOrder": 0
+      },
+      {
+        "menuContext": "教学任务",
+        "menuAction": "Operation4TeamTeacher/index?currentTask=教学任务",
+        "menuDescription": "各种项目的基础数据",
+        "menuOrder": 0
+      }
+    ]
   }
 ]
