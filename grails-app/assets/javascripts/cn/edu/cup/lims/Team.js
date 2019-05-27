@@ -35,6 +35,15 @@ function appendParamsBootStrap(title) {
             }
             break
         case "队员列表":
+            key += "相关团队";
+            id = readStorage(key, 0);
+            console.info("当前id:" + key + "=" + id);
+            if (id > 0) {
+                param = "&currentTeam=" + id;
+                tipsOperation4Team.html("查看当前团队：" + id);
+            } else {
+                tipsOperation4Team.html("请先选择团队！");
+            }
             break
     }
     return param;
@@ -60,8 +69,8 @@ function disband(id) {
 * 解聘队员
 * */
 function dismiss(id) {
-    var ids = loadAllDisplayTitleId(jsTitleTeam);
-    ajaxExecute("operation4Team/dismiss/?person=" + id + "&currentTeam=" + ids[1])
+    var tid = readStorage("currentKey相关团队", 0);
+    ajaxExecute("operation4Team/dismiss/?person=" + id + "&currentTeam=" + tid)
     console.info("解聘：" + id);
     location.reload();
 }
@@ -119,15 +128,6 @@ function shiftDisplay(title) {
         case "相关团队":
             break;
         case "队员列表":
-            key += "相关团队";
-            id = readCookie(key, 0);
-            console.info("当前id:" + key + "=" + id);
-            if (id > 0) {
-                param = "&currentTeam=" + id;
-                tipsOperation4Team.html("查看当前团队：" + id);
-            } else {
-                tipsOperation4Team.html("请先选择团队！");
-            }
             break
     }
     return param

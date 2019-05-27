@@ -24,22 +24,24 @@ class CommonQueryAService {
         result.view = "default"
         result.objectList = objectList
         if (queryStatement) {
-            if (queryStatement.queryString) {
-                // 处理视图
-                if (queryStatement.viewName) {
-                    result.view = queryStatement.viewName
+            // 处理视图
+            if (queryStatement.viewName) {
+                result.view = queryStatement.viewName
+            }
+            if (queryStatement.needToQuery) {
+                if (queryStatement.queryString) {
+                    // 执行查询
+                    def queryString = queryStatement.queryString
+                    println("列表查询：${queryString}")
+                    if (queryStatement.isSQL) {
+                        objectList = processParameters4SQL(queryString, leftParams)
+                    } else {
+                        (queryString, leftParams) = processSpecailParameter(queryString, leftParams)
+                        objectList = QueryStatementA.executeQuery(queryString, leftParams)
+                    }
+                    result.objectList = objectList
+                    println("查询结果：${objectList}")
                 }
-                // 执行查询
-                def queryString = queryStatement.queryString
-                println("列表查询：${queryString}")
-                if (queryStatement.isSQL) {
-                    objectList = processParameters4SQL(queryString, leftParams)
-                } else {
-                    (queryString, leftParams) = processSpecailParameter(queryString, leftParams)
-                    objectList = QueryStatementA.executeQuery(queryString, leftParams)
-                }
-                result.objectList = objectList
-                println("查询结果：${objectList}")
             }
         }
         return result
@@ -54,15 +56,17 @@ class CommonQueryAService {
         def (QueryStatementA queryStatement, leftParams) = findOrCreateQueryString(params)
         // 开始执行查询
         if (queryStatement) {
-            if (queryStatement.queryString) {
-                def queryString = queryStatement.queryString
-                println("统计语句：${queryString}")
-                if (queryStatement.isSQL) {
-                    def c = processParameters4SQL(queryString, leftParams)
-                    count = [c[0].values()[0]]
-                } else {
-                    (queryString, leftParams) = processSpecailParameter(queryString, leftParams)
-                    count = QueryStatementA.executeQuery(queryString, leftParams)
+            if (queryStatement.needToQuery) {
+                if (queryStatement.queryString) {
+                    def queryString = queryStatement.queryString
+                    println("统计语句：${queryString}")
+                    if (queryStatement.isSQL) {
+                        def c = processParameters4SQL(queryString, leftParams)
+                        count = [c[0].values()[0]]
+                    } else {
+                        (queryString, leftParams) = processSpecailParameter(queryString, leftParams)
+                        count = QueryStatementA.executeQuery(queryString, leftParams)
+                    }
                 }
             }
         }

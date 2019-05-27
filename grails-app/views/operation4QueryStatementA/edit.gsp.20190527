@@ -43,54 +43,38 @@
         </g:hasErrors>
         <g:form id="${this.queryStatementA.id}" action="update" controller="${params.controller}" method="PUT">
             <g:hiddenField name="version" value="${this.queryStatementA?.version}"/>
-
-            <fieldset class="form">
-
-                <div class='fieldcontain'>
-                    <label for='paramsString'>Params String</label>
+            <div>
+                <!--f:all bean="queryStatementA"/-->
+                <div class="form-group">
+                    <label for='paramsString'>参数列表：</label>
                     ${this.queryStatementA.paramsString}
                 </div>
 
-                <div class='fieldcontain'>
+                <div class='form-group'>
                     <label for='queryString'>Query String</label>
-                    <g:textArea name="queryString" value="${this.queryStatementA.queryString}"
-                                maxlength="1024" style="width:70em; rows:10"
-                                id="queryString">
-                    </g:textArea>
+                    <g:textArea name="queryString" value="${this.queryStatementA.queryString}" id="queryString"
+                                style="width:80em; rows:10"/>
                 </div>
 
-                <div class='fieldcontain'>
-                    <label for='viewName'>View Name</label><input type="text" name="viewName"
-                                                                  value="${this.queryStatementA.viewName}"
-                                                                  id="viewName"/>
+                <div class='form-group'>
+                    <label for='viewName'>View Name</label>
+                    <g:textField name="viewName" value="${this.queryStatementA.viewName}" id="viewName"/>
                 </div>
 
-                <div class='fieldcontain'>
-                    <label for='isSQL'>Is SQL</label>
-                    <input type="hidden" name="_isSQL"/>
-                    <g:if test="${this.queryStatementA.isSQL}">
-                        <input type="checkbox" name="isSQL" id="isSQL" checked="checked"/>
-                    </g:if>
-                    <g:else>
-                        <input type="checkbox" name="isSQL" id="isSQL"/>
-                    </g:else>
+                <div class='form-check'>
+                    <label for='isSQL'>Is SQL</label><input type="hidden" name="_isSQL"/>
+                    <input type="checkbox" name="isSQL" id="isSQL"/>
                 </div>
 
-                <div class='fieldcontain'>
-                    <label for='needToQuery'>Need To Query</label>
-                    <input type="hidden" name="_needToQuery"/>
-                    <g:if test="${this.queryStatementA.needToQuery}">
-                        <input type="checkbox" name="needToQuery" checked="checked" id="needToQuery"/>
-                    </g:if>
-                    <g:else>
-                        <input type="checkbox" name="needToQuery" id="needToQuery"/>
-                    </g:else>
+                <div class='form-check'>
+                    <label for='needToQuery'>是否需要执行</label><input type="hidden" name="_needToQuery"/>
+                    <input type="checkbox" name="needToQuery" id="needToQuery"
+                           value="${this.queryStatementA.needToQuery}"/>
                 </div>
-            </fieldset>
 
-            <g:hiddenField name="nextController" value="${params.nextController}"/>
-            <g:hiddenField name="nextAction" value="${params.nextAction}"/>
-
+                <g:hiddenField name="nextController" value="${params.nextController}"/>
+                <g:hiddenField name="nextAction" value="${params.nextAction}"/>
+            </div>
             <fieldset class="buttons">
                 <input class="save" type="submit"
                        value="${message(code: 'default.button.update.label', default: 'Update')}"/>
