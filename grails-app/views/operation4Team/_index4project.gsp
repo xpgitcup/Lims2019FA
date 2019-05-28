@@ -21,7 +21,7 @@
         <div class="col-6">
             <div class="card small">
                 <!-- 选项卡 -->
-                <ul class="nav nav-tabs" role="tablist" title="用户服务">
+                <ul class="nav nav-tabs" role="tablist" title="用户服务" id="左边">
                     <li class="nav-item">
                         <a href="#div可选项目" class="nav-link" data-toggle="tab">
                             可选项目

@@ -7,6 +7,12 @@ $(function () {
     setupPaginationBootStrap();
     setupTabsBootStrap();
     tipsOperation4Team = $("#tipsOperation4Team");
+
+    var ttt = $("#左边");
+    console.info(ttt);
+    console.info(ttt.children());
+    console.info(ttt.find("a.nav-link"));
+
 })
 
 
