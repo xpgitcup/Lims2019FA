@@ -19,7 +19,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-6">
-            <div class="card small">
+            <div class="card small" id="operation4TeamLeft" title="左边">
                 <!-- 选项卡 -->
                 <ul class="nav nav-tabs" role="tablist" title="用户服务" id="左边">
                     <li class="nav-item">
@@ -163,7 +163,7 @@
         </div>
 
         <div class="col-6">
-            <div class="card small">
+            <div class="card small" id="operation4TeamRight" title="右边">
                 <!-- 选项卡 -->
                 <ul class="nav nav-tabs" role="tablist" title="科研服务">
                     <li class="nav-item">

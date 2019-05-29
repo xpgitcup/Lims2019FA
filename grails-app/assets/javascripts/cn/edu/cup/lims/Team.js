@@ -4,8 +4,15 @@ var tipsOperation4Team;
 
 $(function () {
     console.info(document.title + "加载了...")
-    setupPaginationBootStrap();
-    setupTabsBootStrap();
+
+    var operation4TeamLeft = $("#operation4TeamLeft");
+    setupPaginationBootStrap(operation4TeamLeft);
+    setupTabsBootStrap(operation4TeamLeft);
+
+    var operation4TeamRight = $("#operation4TeamRight");
+    setupPaginationBootStrap(operation4TeamRight);
+    setupTabsBootStrap(operation4TeamRight);
+
     tipsOperation4Team = $("#tipsOperation4Team");
 
     var ttt = $("#左边");
