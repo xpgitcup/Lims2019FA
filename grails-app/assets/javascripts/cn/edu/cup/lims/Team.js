@@ -1,15 +1,19 @@
 bootStrapPaginationSetting.identifier = "Team"
 bootStrapPaginationSetting.controller = "operation4Team"
 var tipsOperation4Team;
+var leftTabsDiv;
+var rightTabDiv;
+var operation4TeamLeft;
+var operation4TeamRight;
 
 $(function () {
     console.info(document.title + "加载了...")
 
-    var operation4TeamLeft = $("#operation4TeamLeft");
+    operation4TeamLeft = $("#operation4TeamLeft");
     setupPaginationBootStrap(operation4TeamLeft);
     setupTabsBootStrap(operation4TeamLeft);
 
-    var operation4TeamRight = $("#operation4TeamRight");
+    operation4TeamRight = $("#operation4TeamRight");
     setupPaginationBootStrap(operation4TeamRight);
     setupTabsBootStrap(operation4TeamRight);
 
@@ -116,7 +120,7 @@ function listTeam(id) {
 }
 
 function selectCurrentItem(id) {
-    var title = getCurrentTabTitle()
+    var title = getCurrentTabTitle(operation4TeamLeft)
     sessionStorage.setItem("currentKey" + title, id);
 }
 
