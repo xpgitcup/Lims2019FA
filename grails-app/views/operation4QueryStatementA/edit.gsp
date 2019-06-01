@@ -54,15 +54,16 @@
                 <div class='fieldcontain'>
                     <label for='queryString'>Query String</label>
                     <g:textArea name="queryString" value="${this.queryStatementA.queryString}"
-                                maxlength="1024" style="width:70em; rows:10"
+                                maxlength="1024" style="width:70em; rows:15"
                                 id="queryString">
                     </g:textArea>
                 </div>
 
                 <div class='fieldcontain'>
-                    <label for='viewName'>View Name</label><input type="text" name="viewName"
-                                                                  value="${this.queryStatementA.viewName}"
-                                                                  id="viewName"/>
+                    <label for='viewName'>View Name</label>
+                    <input type="text" name="viewName" width="50em"
+                           value="${this.queryStatementA.viewName}"
+                           id="viewName"/>
                 </div>
 
                 <div class='fieldcontain'>

@@ -17,7 +17,7 @@ class CommonController {
         def view = result.view
         flash.message = result.message
         if (request.xhr) {
-            render(template: view, model: [objectList: result.objectList, flash: flash])
+            render(template: view, model: [objectList: result.objectList, flash: flash, result: result])
         } else {
             respond result.objectList
         }

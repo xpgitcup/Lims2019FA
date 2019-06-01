@@ -210,12 +210,14 @@ function loadDataBootStrap(title, currentPage) {
     var pageParams = getParams(currentPage, pageSize)
     var append = appendParamsBootStrap(title)
     var url = bootStrapPaginationSetting.controller + "/list" + pageParams + "&key=" + title + append;
+    console.info("列表：" + url);
     ajaxRun(url, 0, "display" + title + "Div");
 }
 
 function countDataBootStrap(title) {
     var append = appendParamsBootStrap(title)
     var url = bootStrapPaginationSetting.controller + "/count?key=" + title + append;
+    //console.info("统计:" + url);
     var total = ajaxCalculate(url);
     return total;
 }

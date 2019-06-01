@@ -12,6 +12,12 @@
         "menuOrder": 0
       },
       {
+        "menuContext": "菜单维护",
+        "menuAction": "Operation4SystemMenu/index",
+        "menuDescription": "对系统的菜单进行维护",
+        "menuOrder": 10
+      },
+      {
         "menuContext": "用户维护",
         "menuAction": "Operation4SystemUser/index",
         "menuDescription": "对系统的用户进行用户友好的维护",
@@ -114,21 +120,15 @@
     "menuOrder": 0,
     "menuItems": [
       {
-        "menuContext": "动态菜单",
-        "menuAction": "userDefinedFunction/index",
-        "menuDescription": "动态的菜单",
-        "menuOrder": 0
-      },
-      {
         "menuContext": "科研任务",
-        "menuAction": "Operation4TeamTeacher/index?currentTask=科研任务",
-        "menuDescription": "各种项目的基础数据",
+        "menuAction": "Operation4TeamTeacherProject/index",
+        "menuDescription": "教师处理各种科研项目",
         "menuOrder": 0
       },
       {
         "menuContext": "教学任务",
-        "menuAction": "Operation4TeamTeacher/index?currentTask=教学任务",
-        "menuDescription": "各种项目的基础数据",
+        "menuAction": "Operation4TeamTeacherCourse/index",
+        "menuDescription": "教室处理各种教学任务",
         "menuOrder": 0
       }
     ]

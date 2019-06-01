@@ -20,8 +20,8 @@
             <td>${item.keyString}</td>
             <td>${item.paramsString}</td>
             <td>
-                <g:if test="${item.queryString?.length() > 100}">
-                    ${item.queryString.substring(0, 100)}...
+                <g:if test="${item.queryString?.length() > 90}">
+                    ${item.queryString.substring(0, 90)}...
                 </g:if>
                 <g:else>
                     ${item.queryString}
