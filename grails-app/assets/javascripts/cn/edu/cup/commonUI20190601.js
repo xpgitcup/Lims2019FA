@@ -9,16 +9,22 @@ var bootStrapPaginationSetting = {
 function setupPaginationBootStrap(tabsDiv) {
     // 对每个标签进行操作
     //var tabs = $("a.nav-link");
-    console.info("设置当前Div:");
-    console.info(tabsDiv.attr("title"));
+    //console.info("设置当前Div:");
+    //console.info(tabsDiv.attr("title"));
     var tabs = tabsDiv.find("a.nav-link");
+    var pageSize = 10;
+    var pageSizeName;
+    var total;
+    var totalPageName;
+    var totalPage;
+    var currentPageName;
+    var currentPage = 1;
     tabs.each(function (e) {
         // 开头的提示
         var title = tabs[e].text.trim();
-        console.info("处理：" + bootStrapPaginationSetting.identifier + title + "!");
+        //console.info("处理：" + bootStrapPaginationSetting.identifier + title + "!");
         // 页长度
-        var pageSizeName = "pageSize" + bootStrapPaginationSetting.identifier + title;
-        var pageSize = 10;
+        pageSizeName = "pageSize" + bootStrapPaginationSetting.identifier + title;
         if (localStorage.hasOwnProperty(pageSizeName)) {
             pageSize = parseInt(localStorage.getItem(pageSizeName))
         } else {
@@ -26,13 +32,13 @@ function setupPaginationBootStrap(tabsDiv) {
         }
         $("#" + pageSizeName).html(pageSize);
         // 总页数
-        var total = countDataBootStrap(title);
-        var totalPageName = "totalPage" + bootStrapPaginationSetting.identifier + title;
-        var totalPage = Math.ceil(total / pageSize)
+        total = countDataBootStrap(title);
+        totalPageName = "totalPage" + bootStrapPaginationSetting.identifier + title;
+        totalPage = Math.ceil(total / pageSize)
         $("#" + totalPageName).html(totalPage)
         // 当前页
-        var currentPageName = "currentPage" + bootStrapPaginationSetting.identifier + title;
-        var currentPage = 1;
+        currentPageName = "currentPage" + bootStrapPaginationSetting.identifier + title;
+        currentPage = 1;
         if (localStorage.hasOwnProperty(currentPageName)) {
             currentPage = parseInt(localStorage.getItem(currentPageName));
         }
@@ -42,7 +48,45 @@ function setupPaginationBootStrap(tabsDiv) {
         }
         $("#" + currentPageName).html(currentPage);
     })
+}
 
+/*
+* 设置标签页的翻页属性
+* */
+function setupPagination4Tab(theTab) {
+    var pageSize = 10;
+    var pageSizeName;
+    var total;
+    var totalPageName;
+    var totalPage;
+    var currentPageName;
+    var currentPage = 1;
+    var title = theTab.text.trim();
+    //console.info("处理：" + bootStrapPaginationSetting.identifier + title + "!");
+    // 页长度
+    pageSizeName = "pageSize" + bootStrapPaginationSetting.identifier + title;
+    if (localStorage.hasOwnProperty(pageSizeName)) {
+        pageSize = parseInt(localStorage.getItem(pageSizeName))
+    } else {
+        localStorage.setItem(pageSizeName, pageSize);
+    }
+    $("#" + pageSizeName).html(pageSize);
+    // 总页数
+    total = countDataBootStrap(title);
+    totalPageName = "totalPage" + bootStrapPaginationSetting.identifier + title;
+    totalPage = Math.ceil(total / pageSize)
+    $("#" + totalPageName).html(totalPage)
+    // 当前页
+    currentPageName = "currentPage" + bootStrapPaginationSetting.identifier + title;
+    currentPage = 1;
+    if (localStorage.hasOwnProperty(currentPageName)) {
+        currentPage = parseInt(localStorage.getItem(currentPageName));
+    }
+    // 如果当前页大于总页数，跳到开头
+    if (currentPage > totalPage) {
+        currentPage = 1
+    }
+    $("#" + currentPageName).html(currentPage);
 }
 
 /*
@@ -50,19 +94,24 @@ function setupPaginationBootStrap(tabsDiv) {
 * */
 function setupTabsBootStrap(tabsDiv) {
     var tabsTitle = tabsDiv.attr("title");
-    console.info(tabsTitle);
+    //console.info(tabsTitle);
     var currentTabName = "currentTab" + tabsTitle + bootStrapPaginationSetting.identifier;
     // 每个标签绑定数据加载函数---
+    var title;
     tabsDiv.find("a.nav-link").on("click", function (e) {
-        var title = $(e.target).text().trim();
-        console.info("点击事件..." + title + "!")
+        //console.info("激活事件：");
+        //console.info(e);
+        //console.info(e.target);
+        setupPagination4Tab(e.target);
+        title = $(e.target).text().trim();
+        //console.info("点击事件..." + title + "!")
         localStorage.setItem(currentTabName, title); //记录缺省标签
         loadCurrentPageBootStrap(title)
     })
     // 处理缺省标签
     if (localStorage.hasOwnProperty(currentTabName)) {
         var title = localStorage.getItem(currentTabName);
-        console.info("激活" + title);
+        //console.info("激活" + title);
         var url = "a.nav-link:contains('" + title + "')"
         var tab = tabsDiv.find(url);
         if (tab != undefined) {
@@ -210,7 +259,7 @@ function loadDataBootStrap(title, currentPage) {
     var pageParams = getParams(currentPage, pageSize)
     var append = appendParamsBootStrap(title)
     var url = bootStrapPaginationSetting.controller + "/list" + pageParams + "&key=" + title + append;
-    console.info("列表：" + url);
+    //console.info("列表：" + url);
     ajaxRun(url, 0, "display" + title + "Div");
 }
 

@@ -8,11 +8,11 @@ var tabs任务执行Div;
 $(function () {
     console.info(document.title + "加载了...")
     tabs任务选择Div = $("#tabs任务选择Div");
-    setupPaginationBootStrap(tabs任务选择Div);
+    //setupPaginationBootStrap(tabs任务选择Div);
     setupTabsBootStrap(tabs任务选择Div);
 
     tabs任务执行Div = $("#tabs任务执行Div");
-    setupPaginationBootStrap(tabs任务执行Div);
+    //setupPaginationBootStrap(tabs任务执行Div);
     setupTabsBootStrap(tabs任务执行Div);
 })
 
